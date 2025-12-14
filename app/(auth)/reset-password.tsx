@@ -1,23 +1,50 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Alert, StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native'
 import { supabase } from '../../lib/supabase'
 import { useRouter } from 'expo-router'
 
-export default function SignInScreen() {
-  const [email, setEmail] = useState('')
+export default function ResetPasswordScreen() {
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  async function signInWithEmail() {
+  async function updatePassword() {
+    if (!password || !confirmPassword) {
+      Alert.alert('Error', 'Please fill in all fields')
+      return
+    }
+
+    if (password !== confirmPassword) {
+      Alert.alert('Error', 'Passwords do not match')
+      return
+    }
+
+    if (password.length < 6) {
+      Alert.alert('Error', 'Password must be at least 6 characters long')
+      return
+    }
+
     setLoading(true)
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
+    const { error } = await supabase.auth.updateUser({
+      password: password
     })
 
-    if (error) Alert.alert('Error', error.message)
-    setLoading(false)
+    if (error) {
+      Alert.alert('Error', error.message)
+      setLoading(false)
+    } else {
+      Alert.alert(
+        'Success',
+        'Your password has been updated successfully!',
+        [
+          {
+            text: 'OK',
+            onPress: () => router.replace('/(tabs)')
+          }
+        ]
+      )
+    }
   }
 
   return (
@@ -26,25 +53,13 @@ export default function SignInScreen() {
       style={styles.container}
     >
       <View style={styles.content}>
-        <Text style={styles.title}>Welcome Back</Text>
-        <Text style={styles.subtitle}>Sign in to your account</Text>
+        <Text style={styles.title}>Reset Password</Text>
+        <Text style={styles.subtitle}>Enter your new password</Text>
 
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
-            placeholder="Email"
-            placeholderTextColor="#999"
-            onChangeText={setEmail}
-            value={email}
-            autoCapitalize="none"
-            keyboardType="email-address"
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
+            placeholder="New Password"
             placeholderTextColor="#999"
             onChangeText={setPassword}
             value={password}
@@ -53,28 +68,27 @@ export default function SignInScreen() {
           />
         </View>
 
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Confirm New Password"
+            placeholderTextColor="#999"
+            onChangeText={setConfirmPassword}
+            value={confirmPassword}
+            secureTextEntry
+            autoCapitalize="none"
+          />
+        </View>
+
         <TouchableOpacity
           style={[styles.button, loading && styles.buttonDisabled]}
-          onPress={signInWithEmail}
+          onPress={updatePassword}
           disabled={loading}
         >
-          <Text style={styles.buttonText}>Sign In</Text>
+          <Text style={styles.buttonText}>
+            {loading ? 'Updating...' : 'Update Password'}
+          </Text>
         </TouchableOpacity>
-
-        {/* forgot password */}
-        <TouchableOpacity 
-          style={styles.forgotPassword}
-          onPress={() => router.push('/(auth)/forgot-password')}
-        >
-          <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-        </TouchableOpacity>
-
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>Don't have an account? </Text>
-          <TouchableOpacity onPress={() => router.push('/(auth)/sign-up')}>
-            <Text style={styles.link}>Sign Up</Text>
-          </TouchableOpacity>
-        </View>
       </View>
     </KeyboardAvoidingView>
   )
@@ -122,30 +136,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: '600',
-  },
-  forgotPassword: {
-    alignSelf: 'flex-end',
-    marginBottom: 16,
-  },
-  forgotPasswordText: {
-    fontSize: 14,
-    color: '#007AFF',
-    fontWeight: '500',
-  },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 24,
-  },
-  footerText: {
-    fontSize: 14,
-    color: '#666',
-  },
-  link: {
-    fontSize: 14,
-    color: '#007AFF',
     fontWeight: '600',
   },
 })

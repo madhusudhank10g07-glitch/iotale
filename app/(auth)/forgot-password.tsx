@@ -3,20 +3,36 @@ import { Alert, StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvo
 import { supabase } from '../../lib/supabase'
 import { useRouter } from 'expo-router'
 
-export default function SignInScreen() {
+export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  async function signInWithEmail() {
+  async function resetPassword() {
+    if (!email) {
+      Alert.alert('Error', 'Please enter your email address')
+      return
+    }
+
     setLoading(true)
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: 'myapp://reset-password', // Deep link for mobile
     })
 
-    if (error) Alert.alert('Error', error.message)
+    if (error) {
+      Alert.alert('Error', error.message)
+    } else {
+      Alert.alert(
+        'Check your email',
+        'We have sent you a password reset link. Please check your inbox.',
+        [
+          {
+            text: 'OK',
+            onPress: () => router.back()
+          }
+        ]
+      )
+    }
     setLoading(false)
   }
 
@@ -26,8 +42,17 @@ export default function SignInScreen() {
       style={styles.container}
     >
       <View style={styles.content}>
-        <Text style={styles.title}>Welcome Back</Text>
-        <Text style={styles.subtitle}>Sign in to your account</Text>
+        <TouchableOpacity 
+          style={styles.backButton}
+          onPress={() => router.back()}
+        >
+          <Text style={styles.backText}>← Back</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.title}>Forgot Password?</Text>
+        <Text style={styles.subtitle}>
+          Enter your email address and we'll send you a link to reset your password
+        </Text>
 
         <View style={styles.inputContainer}>
           <TextInput
@@ -41,38 +66,20 @@ export default function SignInScreen() {
           />
         </View>
 
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor="#999"
-            onChangeText={setPassword}
-            value={password}
-            secureTextEntry
-            autoCapitalize="none"
-          />
-        </View>
-
         <TouchableOpacity
           style={[styles.button, loading && styles.buttonDisabled]}
-          onPress={signInWithEmail}
+          onPress={resetPassword}
           disabled={loading}
         >
-          <Text style={styles.buttonText}>Sign In</Text>
-        </TouchableOpacity>
-
-        {/* forgot password */}
-        <TouchableOpacity 
-          style={styles.forgotPassword}
-          onPress={() => router.push('/(auth)/forgot-password')}
-        >
-          <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+          <Text style={styles.buttonText}>
+            {loading ? 'Sending...' : 'Send Reset Link'}
+          </Text>
         </TouchableOpacity>
 
         <View style={styles.footer}>
-          <Text style={styles.footerText}>Don't have an account? </Text>
-          <TouchableOpacity onPress={() => router.push('/(auth)/sign-up')}>
-            <Text style={styles.link}>Sign Up</Text>
+          <Text style={styles.footerText}>Remember your password? </Text>
+          <TouchableOpacity onPress={() => router.push('/(auth)/sign-in')}>
+            <Text style={styles.link}>Sign In</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -90,6 +97,16 @@ const styles = StyleSheet.create({
     padding: 24,
     justifyContent: 'center',
   },
+  backButton: {
+    position: 'absolute',
+    top: 60,
+    left: 24,
+  },
+  backText: {
+    fontSize: 16,
+    color: '#007AFF',
+    fontWeight: '500',
+  },
   title: {
     fontSize: 32,
     fontWeight: 'bold',
@@ -99,6 +116,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#666',
     marginBottom: 32,
+    lineHeight: 22,
   },
   inputContainer: {
     marginBottom: 16,
@@ -123,15 +141,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: '600',
-  },
-  forgotPassword: {
-    alignSelf: 'flex-end',
-    marginBottom: 16,
-  },
-  forgotPasswordText: {
-    fontSize: 14,
-    color: '#007AFF',
-    fontWeight: '500',
   },
   footer: {
     flexDirection: 'row',

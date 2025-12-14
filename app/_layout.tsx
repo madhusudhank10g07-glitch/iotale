@@ -7,6 +7,8 @@ import 'react-native-reanimated'
 
 import { useColorScheme } from '@/hooks/use-color-scheme'
 import { supabase } from '../lib/supabase'
+import { LanguageProvider } from '../contexts/LanguageContext'
+import SplashScreen from '../components/SplashScreen'
 
 export const unstable_settings = {
   anchor: '(tabs)',
@@ -18,15 +20,24 @@ export default function RootLayout() {
   const [loading, setLoading] = useState(true)
   const segments = useSegments()
   const router = useRouter()
+  const [showSplash, setShowSplash] = useState(true)
 
+  // Splash screen timer - runs once on mount
   useEffect(() => {
-    // Get initial session
+    const timer = setTimeout(() => {
+      setShowSplash(false)
+    }, 8000) // 8 seconds as requested
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  // Get initial session and listen for auth changes
+  useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
       setLoading(false)
     })
 
-    // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session)
     })
@@ -34,32 +45,38 @@ export default function RootLayout() {
     return () => subscription.unsubscribe()
   }, [])
 
+  // Handle navigation based on auth state
   useEffect(() => {
     if (loading) return
 
     const inAuthGroup = segments[0] === '(auth)'
 
     if (!session && !inAuthGroup) {
-      // Redirect to sign-in if not authenticated
       router.replace('/(auth)/sign-in')
     } else if (session && inAuthGroup) {
-      // Redirect to app if authenticated
       router.replace('/(tabs)')
     }
   }, [session, segments, loading])
 
+  // Show splash screen first (all hooks are called before this)
+  if (showSplash) {
+    return <SplashScreen />
+  }
+
+  // Show loading state
   if (loading) {
-    return null // Or add a loading screen component here
+    return null
   }
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(auth)" />
-        <Stack.Screen name="(tabs)" />
-       
-      </Stack>
-      <StatusBar style="auto" />
+      <LanguageProvider>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(auth)" />
+          <Stack.Screen name="(tabs)" />
+        </Stack>
+        <StatusBar style="auto" />
+      </LanguageProvider>
     </ThemeProvider>
   )
 }

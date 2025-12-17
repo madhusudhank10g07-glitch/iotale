@@ -2,11 +2,16 @@ import React, { useState } from 'react'
 import { Alert, StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native'
 import { supabase } from '../../lib/supabase'
 import { useRouter } from 'expo-router'
-
+import { useNavigation } from '@react-navigation/native'
+import BackgroundPage from "@/components/props/peppabg";
 export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const navigation = useNavigation();
+  const handleBack = () => {
+    navigation.goBack();
+  };
 
   async function resetPassword() {
     if (!email) {
@@ -37,6 +42,10 @@ export default function ForgotPasswordScreen() {
   }
 
   return (
+    <BackgroundPage
+      backgroundSource={require('../../assets/images/bg/pass/forgpasbg.png')}
+
+    >
     <KeyboardAvoidingView 
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
@@ -84,13 +93,13 @@ export default function ForgotPasswordScreen() {
         </View>
       </View>
     </KeyboardAvoidingView>
+     </BackgroundPage>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
   content: {
     flex: 1,
@@ -104,7 +113,7 @@ const styles = StyleSheet.create({
   },
   backText: {
     fontSize: 16,
-    color: '#007AFF',
+    color: '#000912ff',
     fontWeight: '500',
   },
   title: {

@@ -1,97 +1,134 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { useRouter } from 'expo-router'
 
+
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
+import BackgroundPage from '@/components/props/peppabg';
 export default function DeleteConfirmationScreen() {
-  const router = useRouter()
+  const router = useRouter();
 
   function handleYes() {
-    router.push('/delete-input')
+    router.push('/delete-input');
   }
 
   function handleCancel() {
-    router.push('/cancel-delete')
+    router.push('/cancel-delete');
   }
 
   return (
+    <BackgroundPage
+      backgroundSource={require('../assets/images/bg/delprofile.png')}
+
+    >
     <View style={styles.container}>
-      <View style={styles.modal}>
+      {/* Back Button - Mapped to handleCancel to fit the style pattern */}
+      <TouchableOpacity style={styles.backButton} onPress={handleCancel}>
+        <Text style={styles.backText}>← Back</Text>
+      </TouchableOpacity>
+
+      {/* Main Card */}
+      <View style={styles.card}>
+        {/* Title */}
         <Text style={styles.title}>Delete Account?</Text>
-        <Text style={styles.message}>
-          Are you sure you want to delete your account? This action cannot be undone.
+
+        {/* Description */}
+        <Text style={styles.description}>
+         Are you sure you want to delete your account? You will erase all data and history Linked to that account
         </Text>
-
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={[styles.button, styles.cancelButton]}
-            onPress={handleCancel}
-          >
-            <Text style={styles.cancelButtonText}>Cancel</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.button, styles.yesButton]}
-            onPress={handleYes}
-          >
-            <Text style={styles.yesButtonText}>Yes, Delete</Text>
-          </TouchableOpacity>
-        </View>
       </View>
+
+      {/* Yes Button - Styled like the pink delete button */}
+      <TouchableOpacity
+        style={styles.deleteButton}
+        onPress={handleYes}
+      >
+        <Text style={styles.deleteButtonText}>Yes, Delete</Text>
+      </TouchableOpacity>
+
+      {/* Cancel Button - Added as a secondary action below */}
+      <TouchableOpacity
+        style={styles.cancelButton}
+        onPress={handleCancel}
+      >
+        <Text style={styles.cancelButtonText}>Cancel</Text>
+      </TouchableOpacity>
     </View>
-  )
+    </BackgroundPage>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 24,
+    flex: 1,  // Ensure background is white to match the aesthetic
   },
-  modal: {
-    backgroundColor: '#fff',
-    borderRadius: 16,
+  backButton: {
+    marginBottom: 30,
+    padding: 10,
+    marginTop: 20, // Adjusted for typical SafeArea
+    marginLeft: 20,
+    alignSelf: 'flex-start',
+  },
+  backText: {
+    color: '#333', // Dark text since background is white
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  card: {
+    backgroundColor: '#1976D2',
+    borderRadius: 24,
     padding: 24,
-    width: '100%',
-    maxWidth: 400,
+    marginBottom: 40,
+    marginTop: 80, // Positioned similarly to the source
+    marginLeft: 20,
+    marginRight: 20,
+    elevation: 5, // Added shadow for depth
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   title: {
-    fontSize: 24,
+    color: '#FFFFFF',
+    fontSize: 26,
     fontWeight: 'bold',
+    textAlign: 'center',
     marginBottom: 16,
-    textAlign: 'center',
+    marginTop: 8,
   },
-  message: {
-    fontSize: 16,
-    color: '#666',
+  description: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    textAlign: 'center',
+    lineHeight: 22,
     marginBottom: 24,
-    textAlign: 'center',
-    lineHeight: 24,
+    paddingHorizontal: 10,
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    gap: 12,
-  },
-  button: {
-    flex: 1,
-    borderRadius: 8,
-    padding: 16,
+  deleteButton: {
+    backgroundColor: '#FF6B9D',
+    borderRadius: 30,
+    padding: 18,
     alignItems: 'center',
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 15,
+  },
+  deleteButtonText: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   cancelButton: {
-    backgroundColor: '#f5f5f5',
-  },
-  yesButton: {
-    backgroundColor: '#ff3b30',
+     backgroundColor: '#ffffffff',
+    borderRadius: 30,
+    padding: 18,
+    alignItems: 'center',
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 15,
   },
   cancelButtonText: {
-    color: '#000',
+    color: '#666',
     fontSize: 16,
     fontWeight: '600',
   },
-  yesButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-})
+});

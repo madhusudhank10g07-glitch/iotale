@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Alert, StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native'
 import { supabase } from '../../lib/supabase'
 import { useRouter } from 'expo-router'
-
+import BackgroundPage from '@/components/props/peppabg'
 export default function ResetPasswordScreen() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -48,6 +48,10 @@ export default function ResetPasswordScreen() {
   }
 
   return (
+    <BackgroundPage
+      backgroundSource={require('../../assets/images/bg/pass/set.png')}
+
+    > 
     <KeyboardAvoidingView 
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
@@ -91,6 +95,7 @@ export default function ResetPasswordScreen() {
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
+     </BackgroundPage>
   )
 }
 

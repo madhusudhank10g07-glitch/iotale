@@ -1,136 +1,353 @@
-// app/language-select.tsx
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, FlatList, Alert } from 'react-native'
-import { useState } from 'react'
-import { useRouter } from 'expo-router'
-import { useLanguage, languagesList as languages } from '../contexts/LanguageContext'
+import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
-export default function LanguageSelectScreen() {
-  const [searchQuery, setSearchQuery] = useState('')
-  const router = useRouter()
-  const { language, setLanguage, t } = useLanguage()
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  FlatList,
+  StatusBar,
+  TextInput,
+  Alert,
+} from 'react-native';
+import { useRouter } from 'expo-router';
+import { useLanguage, languagesList as languages } from '../contexts/LanguageContext';
+import BackgroundPage from '@/components/props/peppabg';
+const LanguageSelectionPage = () => {
+  const navigation = useNavigation();
+  const handleBack = () => {
+    navigation.goBack();
+  };
+
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
+  const { language, setLanguage, t } = useLanguage();
 
   const filteredLanguages = languages.filter(lang =>
     lang.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     lang.nativeName.toLowerCase().includes(searchQuery.toLowerCase())
-  )
+  );
+ 
 
-  async function handleLanguageSelect(langCode: string) {
-    await setLanguage(langCode as any)
-    Alert.alert(t('success'), t('languageUpdated'))
-    router.back()
-  }
+  
+
+  const handleLanguageSelect = async (langCode: string) => {
+    await setLanguage(langCode as any);
+    Alert.alert(t('success'), t('languageUpdated'));
+  };
+
+  const handleNavigation = (tab: string) => {
+    console.log(`Navigate to ${tab}`);
+  };
+
+  const renderLanguageItem = ({ item }: { item: any }) => (
+    <TouchableOpacity
+      style={[
+        styles.languageCard,
+        { backgroundColor: language === item.code ? '#F492B5' : '#2563EB' },
+        language === item.code && styles.selectedCard
+      ]}
+      onPress={() => handleLanguageSelect(item.code)}
+      activeOpacity={0.8}
+    >
+      <View style={styles.languageContent}>
+        <View style={styles.flagContainer}>
+          <Text style={styles.flagEmoji}>{item.flag || '🌐'}</Text>
+        </View>
+        <View style={styles.languageTextContainer}>
+          <Text style={styles.languageName}>{item.nativeName}</Text>
+          <Text style={styles.languageSubtitle}>{item.name}</Text>
+        </View>
+      </View>
+      {language === item.code && (
+        <View style={styles.checkmarkContainer}>
+          <Text style={styles.checkmark}>✓</Text>
+        </View>
+      )}
+    </TouchableOpacity>
+  );
 
   return (
+        <BackgroundPage
+      backgroundSource={require('../assets/images/bg/diybg.png')}
+
+    >
+
+
+
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-          <Text style={styles.backButtonText}>← Back</Text>
-        </TouchableOpacity>
+      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
+      
+      {/* Back Button */}
+      <TouchableOpacity style={styles.backButton} onPress={handleBack}>
+        <Text style={styles.backArrow}>←</Text>
+        <Text style={styles.backText}>Back</Text>
+      </TouchableOpacity>
+
+      {/* Header Section */}
+      <View style={styles.headerSection}>
         <Text style={styles.title}>{t('chooseLanguage')}</Text>
+        <Text style={styles.subtitle}>Choose your language</Text>
       </View>
 
-      <TextInput
-        style={styles.searchInput}
-        placeholder={t('searchLanguage')}
-        value={searchQuery}
-        onChangeText={setSearchQuery}
-        autoCapitalize="none"
-        autoCorrect={false}
-      />
+      {/* Search Input */}
+      <View style={styles.searchContainer}>
+        <TextInput
+          style={styles.searchInput}
+          placeholder={t('searchLanguage')}
+          placeholderTextColor="rgba(255, 255, 255, 0.6)"
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+      </View>
 
+      {/* Language Options with FlatList */}
       <FlatList
         data={filteredLanguages}
         keyExtractor={(item) => item.code}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={[
-              styles.languageItem,
-              language === item.code && styles.selectedLanguage
-            ]}
-            onPress={() => handleLanguageSelect(item.code)}
-          >
-            <View style={styles.languageInfo}>
-              <Text style={styles.languageName}>{item.nativeName}</Text>
-              <Text style={styles.languageEnglishName}>{item.name}</Text>
-            </View>
-            {language === item.code && (
-              <Text style={styles.checkmark}>✓</Text>
-            )}
-          </TouchableOpacity>
-        )}
+        renderItem={renderLanguageItem}
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
+        bounces={false}
+        style={styles.flatList}
       />
+
+      {/* Bottom Navigation - Fixed */}
+      <View style={styles.bottomNav}>
+        <TouchableOpacity 
+          style={styles.navItem}
+          onPress={() => handleNavigation('Profile')}
+        >
+          <View style={styles.navIcon}>
+            <Text style={styles.navIconText}>👤</Text>
+          </View>
+          <Text style={styles.navLabel}>Profile</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+          style={styles.navItem}
+          onPress={() => handleNavigation('MyTales')}
+        >
+          <View style={[styles.navIcon, styles.activeNavIcon]}>
+            <Text style={styles.navIconText}>📖</Text>
+          </View>
+          <Text style={[styles.navLabel, styles.activeNavLabel]}>My Tales</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+          style={styles.navItem}
+          onPress={() => handleNavigation('DiyTales')}
+        >
+          <View style={styles.navIcon}>
+            <Text style={styles.navIconText}>📚</Text>
+          </View>
+          <Text style={styles.navLabel}>Diy Tales</Text>
+        </TouchableOpacity>
+      </View>
     </View>
-  )
-}
+        </BackgroundPage>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
-  header: {
-    paddingTop: 60,
-    paddingHorizontal: 24,
-    paddingBottom: 16,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'transparent',
+    paddingTop: StatusBar.currentHeight || 40,
   },
   backButton: {
-    marginBottom: 16,
-  },
-  backButtonText: {
-    fontSize: 16,
-    color: '#007AFF',
-    fontWeight: '600',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-  },
-  searchInput: {
-    marginHorizontal: 24,
-    marginBottom: 16,
-    padding: 12,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    fontSize: 16,
-    backgroundColor: '#f9f9f9',
-  },
-  listContent: {
-    paddingHorizontal: 24,
-    paddingBottom: 24,
-  },
-  languageItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 16,
-    paddingHorizontal: 16,
-    backgroundColor: '#f5f5f5',
-    borderRadius: 12,
+    marginBottom: 20,
+    alignSelf: 'flex-start',
+    marginLeft: 20,
+    marginTop: 10,
+  },
+  backArrow: {
+    color: '#FFFFFF',
+    fontSize: 22,
+    fontWeight: '600',
+    marginRight: 6,
+  },
+  backText: {
+    color: '#FFFFFF',
+    fontSize: 17,
+    fontWeight: '600',
+  },
+  headerSection: {
+    alignItems: 'center',
+    marginBottom: 20,
+    paddingHorizontal: 20,
+  },
+  title: {
+    color: '#FFFFFF',
+    fontSize: 36,
+    fontWeight: 'bold',
     marginBottom: 12,
+    textAlign: 'center',
   },
-  selectedLanguage: {
-    backgroundColor: '#e3f2fd',
-    borderWidth: 2,
-    borderColor: '#2196F3',
+  subtitle: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    textAlign: 'center',
+    opacity: 0.95,
+    lineHeight: 26,
   },
-  languageInfo: {
+  searchContainer: {
+    paddingHorizontal: 20,
+    marginBottom: 20,
+  },
+  searchInput: {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 14,
+    fontSize: 16,
+    color: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.3)',
+  },
+  flatList: {
+    flex: 1,
+    paddingHorizontal: 20,
+  },
+  listContent: {
+    paddingBottom: 120,
+    gap: 16,
+  },
+  languageCard: {
+    borderRadius: 20,
+    padding: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 6,
+    minHeight: 85,
+    marginBottom: 16,
+  },
+  selectedCard: {
+    backgroundColor: '#F492B5',
+    shadowColor: '#F492B5',
+    shadowOpacity: 0.4,
+  },
+  languageContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  flagContainer: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  flagEmoji: {
+    fontSize: 28,
+  },
+  languageTextContainer: {
     flex: 1,
   },
   languageName: {
-    fontSize: 18,
-    fontWeight: '600',
+    color: '#FFFFFF',
+    fontSize: 20,
+    fontWeight: 'bold',
     marginBottom: 4,
   },
-  languageEnglishName: {
+  languageSubtitle: {
+    color: '#FFFFFF',
     fontSize: 14,
-    color: '#666',
+    opacity: 0.9,
+  },
+  checkmarkContainer: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 12,
   },
   checkmark: {
-    fontSize: 24,
-    color: '#2196F3',
+    color: '#F492B5',
+    fontSize: 20,
     fontWeight: 'bold',
   },
-})
+  bottomNav: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    paddingBottom: 25,
+    backgroundColor: 'rgba(30, 64, 175, 0.95)',
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: -3,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 10,
+  },
+  navItem: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  navIcon: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 6,
+  },
+  activeNavIcon: {
+    backgroundColor: '#F492B5',
+    shadowColor: '#F492B5',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  navIconText: {
+    fontSize: 24,
+  },
+  navLabel: {
+    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: '500',
+    opacity: 0.8,
+  },
+  activeNavLabel: {
+    opacity: 1,
+    fontWeight: '600',
+  },
+});
+
+export default LanguageSelectionPage;

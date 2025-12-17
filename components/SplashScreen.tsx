@@ -5,11 +5,11 @@ export default function SplashScreen() {
   return (
     <View style={styles.container}>
       {/* Add your logo or image */}
-      <Image
+      {/* <Image
         source={require('../assets/images/icon.png')} // Update path to your logo
         style={styles.logo}
         resizeMode="contain"
-      />
+      /> */}
       <Text style={styles.title}>Welcome to My App</Text>
       <Text style={styles.subtitle}>Loading...</Text>
     </View>

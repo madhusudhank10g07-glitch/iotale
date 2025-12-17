@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
 import { Session } from '@supabase/supabase-js'
-
+import BackgroundPage from '@/components/props/peppabg'
 export default function HomeScreen() {
   const [session, setSession] = useState<Session | null>(null)
 
@@ -15,6 +15,10 @@ export default function HomeScreen() {
   }, [])
 
   return (
+    <BackgroundPage
+      backgroundSource={require('../../assets/images/bg/homebg.png')}
+
+    > 
     <View style={styles.container}>
       <Text style={styles.title}>Welcome!</Text>
       {session && session.user && (
@@ -26,6 +30,7 @@ export default function HomeScreen() {
         </View>
       )}
     </View>
+     </BackgroundPage>
   )
 }
 

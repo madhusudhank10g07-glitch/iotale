@@ -1,73 +1,160 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { useRouter } from 'expo-router'
-import { useLanguage } from '../contexts/LanguageContext'
-
+ 
+import BackgroundPage from '@/components/props/peppabg'
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+  Alert,
+} from 'react-native';
+import { useNavigation ,useRouter } from 'expo-router';
 export default function CancelDeleteScreen() {
+  const navigate = useNavigation();
+  const [deleteInput, setDeleteInput] = useState('');
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const router = useRouter()
-  const { t } = useLanguage()
+ 
 
-  function handleBackToProfile() {
-    router.back()
+  const handleConfirmDelete = () => {
+    setShowConfirmModal(false);
+    Alert.alert('Success', 'Account deleted successfully');
+    setDeleteInput('');
+  };
+
+  const handleCancelDelete = () => {
+    setShowConfirmModal(false);
+  };
+
+  const handleBack = () => {
+    navigate.goBack();
+  };
+  const handleprofile = () =>{
+    router.push('/profile')
   }
 
   return (
+    <BackgroundPage
+      backgroundSource={require('../assets/images/bg/delprofthank.png')}
+
+    > 
     <View style={styles.container}>
-      <View style={styles.content}>
-        <Text style={styles.emoji}>🎉</Text>
-        <Text style={styles.title}>{t('thanksMessage')}</Text>
-        <Text style={styles.message}>
-          {t('thanksSubMessage')}
+      {/* Back Button */}
+      <TouchableOpacity style={styles.backButton} onPress={handleBack}>
+        <Text style={styles.backText}>← Back</Text>
+      </TouchableOpacity>
+
+      {/* Main Card */}
+      <View style={styles.card}>
+       
+
+        {/* Title */}
+        <Text style={styles.title}>Thanks for
+changing your mind</Text>
+
+        {/* Description */}
+        <Text style={styles.description}>
+          Your all data is preserved you can continue your journey
         </Text>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleBackToProfile}
-        >
-          <Text style={styles.buttonText}>{t('backToProfile')}</Text>
-        </TouchableOpacity>
+        {/* Input Field */}
+       
       </View>
+
+      {/* Delete Button */}
+      <TouchableOpacity
+        style={[
+          styles.deleteButton, 
+        ]}
+        onPress={handleprofile}
+         
+      >
+        <Text style={styles.deleteButtonText}>Go back to Home Screen</Text>
+      </TouchableOpacity>
+
+       
     </View>
-  )
-}
+    </BackgroundPage>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 24,
+    flex: 1,  
   },
-  content: {
-    alignItems: 'center',
-    maxWidth: 400,
+  backButton: {
+    marginBottom: 30,
+    padding:10, 
+    marginTop: 20,
+    marginLeft:20
   },
-  emoji: {
-    fontSize: 64,
-    marginBottom: 24,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  message: {
-    fontSize: 16,
-    color: '#666',
-    marginBottom: 32,
-    textAlign: 'center',
-    lineHeight: 24,
-  },
-  button: {
-    backgroundColor: '#007AFF',
-    borderRadius: 8,
-    padding: 16,
-    paddingHorizontal: 32,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
+  backText: {
+    color: '#FFFFFF',
+    fontSize: 18,
     fontWeight: '600',
   },
-})
+  card: {
+    backgroundColor: '#1976D2',
+    borderRadius: 24,
+    padding: 24,
+    marginBottom: 20,
+    position: 'relative',
+    marginTop:110,
+    marginLeft:20,
+    marginRight:20
+  },
+  closeButton: {
+    position: 'absolute',
+    right: 20,
+    top: 20,
+    width: 32,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  closeText: {
+    color: '#FFFFFF',
+    fontSize: 24,
+    fontWeight: '400',
+  },
+  title: {
+    color: '#FFFFFF',
+    fontSize: 26,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 16,
+    marginTop: 8,
+  },
+  description: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    textAlign: 'center',
+    lineHeight: 22,
+    marginBottom: 24,
+    paddingHorizontal: 10,
+  },
+  input: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 16,
+    fontSize: 16,
+    color: '#333',
+  },
+  deleteButton: {
+    backgroundColor: '#20ca17ff',
+    borderRadius: 30,
+    padding: 18,
+    alignItems: 'center',
+   
+    marginLeft:20,
+    marginRight:20
+  },
+  deleteButtonText: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+   
+});

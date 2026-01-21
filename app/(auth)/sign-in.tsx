@@ -154,7 +154,7 @@
 //   },
 // })
 import React, { useState } from 'react'
-import { Alert, StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, StatusBar, ActivityIndicator } from 'react-native'
+import { Alert, StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, StatusBar, ActivityIndicator, Platform } from 'react-native'
 import { supabase } from '../../lib/supabase'
 import { useRouter } from 'expo-router'
 import BackgroundPage from "@/components/props/peppabg";
@@ -170,14 +170,57 @@ export default function SignInScreen() {
       Alert.alert("Error", "Please enter email and password");
       return;
     }
-    setLoading(true)
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    })
+    
+    setLoading(true);
+    
+    try {
+      console.log('Attempting sign in with:', email.trim());
+      console.log('Starting auth request...');
+      
+      // Create a timeout promise
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Request timeout after 30 seconds')), 30000);
+      });
+      
+      // Race between the auth call and timeout
+      const authPromise = supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password: password,
+      });
+      
+      const { data, error } = await Promise.race([authPromise, timeoutPromise]) as any;
 
-    if (error) Alert.alert('Error', error.message)
-    setLoading(false)
+      console.log('Sign in response received:', { 
+        hasSession: !!data?.session, 
+        hasUser: !!data?.user,
+        error: error?.message 
+      });
+
+      if (error) {
+        console.error('Supabase auth error:', error);
+        Alert.alert('Login Failed', error.message);
+        setLoading(false);
+        return;
+      }
+
+      if (data?.session) {
+        console.log('Session created successfully!');
+        console.log('User ID:', data.user?.id);
+        console.log('Navigating to tabs...');
+        
+        // Navigate immediately
+        router.replace('/(tabs)');
+      } else {
+        console.error('No session returned despite no error');
+        Alert.alert('Error', 'Login succeeded but no session was created');
+        setLoading(false);
+      }
+      
+    } catch (err: any) {
+      console.error('Sign in exception:', err);
+      Alert.alert('Unexpected Error', err?.message || 'Something went wrong during sign in.');
+      setLoading(false);
+    }
   }
 
   const handleForgotPassword = () => {
@@ -200,10 +243,9 @@ export default function SignInScreen() {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
           bounces={false}
+          keyboardShouldPersistTaps="handled"
         >
-          {/* Form Container */}
           <View style={styles.formContainer}>
-            {/* Email Address */}
             <View style={styles.inputGroup}>
               <Text style={styles.label}>Email Address</Text>
               <TextInput
@@ -214,14 +256,15 @@ export default function SignInScreen() {
                 onChangeText={setEmail}
                 keyboardType="email-address"
                 autoCapitalize="none"
+                autoCorrect={false}
+                editable={!loading}
               />
             </View>
 
-            {/* Password */}
             <View style={styles.inputGroup}>
               <View style={styles.passwordHeader}>
                 <Text style={styles.label}>Password</Text>
-                <TouchableOpacity onPress={handleForgotPassword}>
+                <TouchableOpacity onPress={handleForgotPassword} disabled={loading}>
                   <Text style={styles.forgotPassword}>Forgot Password?</Text>
                 </TouchableOpacity>
               </View>
@@ -233,27 +276,28 @@ export default function SignInScreen() {
                 onChangeText={setPassword}
                 secureTextEntry
                 autoCapitalize="none"
+                autoCorrect={false}
+                editable={!loading}
               />
             </View>
 
-            {/* Sign In Button */}
             <TouchableOpacity
-              style={styles.signInButton}
+              style={[styles.signInButton, loading && styles.signInButtonDisabled]}
               onPress={signInWithEmail}
               disabled={loading}
+              activeOpacity={0.7}
             >
               {loading ? (
-                <ActivityIndicator color="#FFF" />
+                <ActivityIndicator color="#FFF" size="small" />
               ) : (
                 <Text style={styles.signInButtonText}>Sign In</Text>
               )}
             </TouchableOpacity>
           </View>
 
-          {/* Sign Up Link */}
           <View style={styles.signUpContainer}>
             <Text style={styles.signUpText}>Don't have an account? </Text>
-            <TouchableOpacity onPress={() => router.push('/(auth)/sign-up')}>
+            <TouchableOpacity onPress={() => router.push('/(auth)/sign-up')} disabled={loading}>
               <Text style={styles.signUpLink}>Sign Up</Text>
             </TouchableOpacity>
           </View>
@@ -326,6 +370,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  signInButtonDisabled: {
+    opacity: 0.6,
   },
   signInButtonText: {
     color: "#FFFFFF",

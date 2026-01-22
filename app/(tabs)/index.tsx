@@ -19,7 +19,7 @@ export default function HomeScreen() {
       backgroundSource={require('../../assets/images/bg/homebg.png')}
 
     > 
-    <View style={styles.container}>
+    {/* <View style={styles.container}>
       <Text style={styles.title}>Welcome!</Text>
       {session && session.user && (
         <View style={styles.userInfo}>
@@ -29,7 +29,7 @@ export default function HomeScreen() {
           <Text style={styles.value}>{session.user.email}</Text>
         </View>
       )}
-    </View>
+    </View> */}
      </BackgroundPage>
   )
 }

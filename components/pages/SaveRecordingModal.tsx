@@ -12,6 +12,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Image } from "react-native";
 
 interface SaveRecordingModalProps {
   visible: boolean;
@@ -67,6 +68,12 @@ const SaveRecordingModal: React.FC<SaveRecordingModalProps> = ({
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.modalOverlay}
       >
+        <View style={styles.tickImageContainer}>
+             <Image
+              source={require("@/assets/images/bg/greentick.png")}
+              style={styles.floatingTick}
+            />
+          </View>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             {/* Close button */}
@@ -74,16 +81,11 @@ const SaveRecordingModal: React.FC<SaveRecordingModalProps> = ({
               <Ionicons name="close" size={24} color="#666" />
             </TouchableOpacity>
 
-            {/* Icon */}
-            <View style={styles.iconContainer}>
-              <Ionicons name="mic-circle" size={60} color="#FF69B4" />
-            </View>
+        
 
             {/* Title */}
-            <Text style={styles.modalTitle}>Name Your Recording</Text>
-            <Text style={styles.modalSubtitle}>
-              Give your tale a memorable title
-            </Text>
+            <Text style={styles.modalTitle}>The audio track was recorded successfully!</Text>
+            
 
             {/* Input */}
             <TextInput
@@ -105,8 +107,7 @@ const SaveRecordingModal: React.FC<SaveRecordingModalProps> = ({
                 style={[styles.button, styles.deleteButton]}
                 onPress={handleDelete}
                 disabled={loading}
-              >
-                <Ionicons name="trash-outline" size={20} color="#FF3B30" />
+              > 
                 <Text style={styles.deleteButtonText}>Delete</Text>
               </TouchableOpacity>
 
@@ -139,6 +140,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  tickImageContainer: {
+    marginBottom: 20, // Pulls the modal box up toward the image
+    zIndex: 10,        // Ensures image stays on top of the white box
+  
+    // Add shadow to the tick container to make it "float"
+  
+  },
+  floatingTick: {
+    width: 300,
+    height: 300,
+    resizeMode: 'contain',
+  },
+
   modalContainer: {
     width: '90%',
     maxWidth: 400,
@@ -204,12 +218,12 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   deleteButton: {
-    backgroundColor: '#FFF5F5',
+    backgroundColor: '#cc2b2b',
     borderWidth: 1,
     borderColor: '#FFE0E0',
   },
   deleteButtonText: {
-    color: '#FF3B30',
+    color: '#ffffff',
     fontSize: 16,
     fontWeight: '600',
   },

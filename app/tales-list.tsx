@@ -1,5 +1,4 @@
-// screens/DIYListPage.tsx
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -10,6 +9,8 @@ import {
   Alert,
   RefreshControl,
   ActivityIndicator,
+  Dimensions,
+  Platform,
 } from 'react-native';
 import { useRouter, useFocusEffect } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -21,6 +22,9 @@ import {
   formatDate,
   Tale,
 } from '../lib/talesService';
+import BackgroundPage from '@/components/props/peppabg';
+
+const { width, height } = Dimensions.get('window');
 
 const DIYListPage = () => {
   const router = useRouter();
@@ -30,12 +34,10 @@ const DIYListPage = () => {
   const [playingId, setPlayingId] = useState<string | null>(null);
   const [sound, setSound] = useState<Audio.Sound | null>(null);
 
-  // Load tales on screen focus
   useFocusEffect(
     useCallback(() => {
       loadTales();
       return () => {
-        // Cleanup sound on unmount
         if (sound) {
           sound.unloadAsync();
         }
@@ -62,17 +64,11 @@ const DIYListPage = () => {
     setRefreshing(false);
   };
 
-  const handleBack = () => {
-    router.back();
-  };
-
-  const handleRecordNew = () => {
-    router.push('/recording');
-  };
+  const handleBack = () => router.back();
+  const handleRecordNew = () => router.push('/recording');
 
   const handlePlayTale = async (tale: Tale) => {
     try {
-      // If already playing this tale, stop it
       if (playingId === tale.id && sound) {
         await sound.stopAsync();
         await sound.unloadAsync();
@@ -81,13 +77,11 @@ const DIYListPage = () => {
         return;
       }
 
-      // Stop any currently playing sound
       if (sound) {
         await sound.stopAsync();
         await sound.unloadAsync();
       }
 
-      // Load and play new sound
       const { sound: newSound } = await Audio.Sound.createAsync(
         { uri: tale.audio_url },
         { shouldPlay: true }
@@ -96,7 +90,6 @@ const DIYListPage = () => {
       setSound(newSound);
       setPlayingId(tale.id);
 
-      // Handle playback completion
       newSound.setOnPlaybackStatusUpdate((status) => {
         if (status.isLoaded && status.didJustFinish) {
           setPlayingId(null);
@@ -105,7 +98,6 @@ const DIYListPage = () => {
         }
       });
     } catch (error) {
-      console.error('Error playing tale:', error);
       Alert.alert('Error', 'Failed to play recording');
     }
   };
@@ -121,24 +113,17 @@ const DIYListPage = () => {
           style: 'destructive',
           onPress: async () => {
             try {
-              // Stop playback if this tale is playing
               if (playingId === tale.id && sound) {
                 await sound.stopAsync();
                 await sound.unloadAsync();
                 setSound(null);
                 setPlayingId(null);
               }
-
               const success = await deleteTale(tale.id, tale.file_path);
-              
               if (success) {
                 setTales(tales.filter(t => t.id !== tale.id));
-                Alert.alert('Success', 'Tale deleted successfully');
-              } else {
-                Alert.alert('Error', 'Failed to delete tale');
               }
             } catch (error) {
-              console.error('Error deleting tale:', error);
               Alert.alert('Error', 'An unexpected error occurred');
             }
           },
@@ -149,7 +134,7 @@ const DIYListPage = () => {
 
   if (loading) {
     return (
-      <View style={[styles.container, styles.centerContent]}>
+      <View style={[styles.container, styles.centerContent, { backgroundColor: '#1a1a1a' }]}>
         <ActivityIndicator size="large" color="#FFFFFF" />
         <Text style={styles.loadingText}>Loading your tales...</Text>
       </View>
@@ -157,93 +142,86 @@ const DIYListPage = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
-      
-      <ScrollView 
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            tintColor="#FFFFFF"
-          />
-        }
-      >
-        {/* Header Section */}
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-            <Ionicons name="arrow-back" size={22} color="#FFFFFF" />
-            <Text style={styles.backText}>Back</Text>
-          </TouchableOpacity>
-
-          <View style={styles.titleRow}>
-            <Text style={styles.title}>My DIY Tales</Text>
-            <TouchableOpacity style={styles.recordButton} onPress={handleRecordNew}>
-              <Ionicons name="add" size={20} color="#FFFFFF" />
-              <Text style={styles.recordButtonText}>Record New</Text>
+    <BackgroundPage backgroundSource={require('../assets/images/bg/diybg.png')}>
+      <View style={styles.container}>
+        <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+        
+        <ScrollView 
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#FFFFFF" />
+          }
+        >
+          {/* Header Section */}
+          <View style={styles.header}>
+            <TouchableOpacity style={styles.backButton} onPress={handleBack}>
+              <Ionicons name="arrow-back" size={width * 0.06} color="#FFFFFF" />
+              <Text style={styles.backText}>Back</Text>
             </TouchableOpacity>
-          </View>
-        </View>
 
-        {/* Tales List */}
-        {tales.length === 0 ? (
-          <View style={styles.emptyContainer}>
-            <Ionicons name="mic-off-outline" size={64} color="rgba(255,255,255,0.3)" />
-            <Text style={styles.emptyText}>No tales yet</Text>
-            <Text style={styles.emptySubtext}>
-              Tap "Record New" to create your first tale!
-            </Text>
+            <View style={styles.titleRow}>
+              <Text style={styles.title} numberOfLines={1} adjustsFontSizeToFit>
+                My DIY Tales
+              </Text>
+              <TouchableOpacity style={styles.recordButton} onPress={handleRecordNew}>
+                <Ionicons name="add" size={18} color="#FFFFFF" />
+                <Text style={styles.recordButtonText}>New</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        ) : (
-          <View style={styles.talesList}>
-            {tales.map((tale) => (
-              <View key={tale.id} style={styles.taleCard}>
-                <View style={styles.taleInfo}>
-                  <Text style={styles.taleTitle} numberOfLines={1}>
-                    {tale.title}
-                  </Text>
-                  <Text style={styles.taleDetails}>
-                    {formatDuration(tale.duration)} | {formatDate(tale.created_at)}
-                  </Text>
-                </View>
-                
-                <View style={styles.actionButtons}>
-                  <TouchableOpacity
-                    style={styles.playButton}
-                    onPress={() => handlePlayTale(tale)}
-                    activeOpacity={0.7}
-                  >
-                    <Ionicons 
-                      name={playingId === tale.id ? 'stop' : 'play'} 
-                      size={24} 
-                      color="#FFFFFF" 
-                    />
-                  </TouchableOpacity>
 
-                  <TouchableOpacity
-                    style={styles.deleteButton}
-                    onPress={() => handleDeleteTale(tale)}
-                    activeOpacity={0.7}
-                  >
-                    <Ionicons name="trash-outline" size={20} color="#FF3B30" />
-                  </TouchableOpacity>
+          {/* Tales List */}
+          {tales.length === 0 ? (
+            <View style={styles.emptyContainer}>
+              <Ionicons name="mic-off-outline" size={width * 0.2} color="rgba(255,255,255,0.3)" />
+              <Text style={styles.emptyText}>No tales yet</Text>
+              <Text style={styles.emptySubtext}>Tap "New" to create your first tale!</Text>
+            </View>
+          ) : (
+            <View style={styles.talesList}>
+              {tales.map((tale) => (
+                <View key={tale.id} style={styles.taleCard}>
+                  <View style={styles.taleInfo}>
+                    <Text style={styles.taleTitle} numberOfLines={1}>{tale.title}</Text>
+                    <Text style={styles.taleDetails}>
+                      {formatDuration(tale.duration)} • {formatDate(tale.created_at)}
+                    </Text>
+                  </View>
+                  
+                  <View style={styles.actionButtons}>
+                    <TouchableOpacity
+                      style={styles.playButton}
+                      onPress={() => handlePlayTale(tale)}
+                    >
+                      <Ionicons 
+                        name={playingId === tale.id ? 'stop' : 'play'} 
+                        size={width * 0.06} 
+                        color="#FFFFFF" 
+                      />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      style={styles.deleteButton}
+                      onPress={() => handleDeleteTale(tale)}
+                    >
+                      <Ionicons name="trash-outline" size={width * 0.05} color="#FF3B30" />
+                    </TouchableOpacity>
+                  </View>
                 </View>
-              </View>
-            ))}
-          </View>
-        )}
-      </ScrollView>
-    </View>
+              ))}
+            </View>
+          )}
+        </ScrollView>
+      </View>
+    </BackgroundPage>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#8B5CF6',
   },
   centerContent: {
     justifyContent: 'center',
@@ -251,7 +229,7 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: width * 0.04,
     marginTop: 16,
   },
   scrollView: {
@@ -259,142 +237,119 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    paddingTop: StatusBar.currentHeight || 40,
-    paddingBottom: 30,
+    // Adjusts top padding based on device notches/status bars
+    paddingTop: Platform.OS === 'ios' ? 60 : StatusBar.currentHeight ? StatusBar.currentHeight + 20 : 40,
+    paddingBottom: 40,
   },
   header: {
-    paddingHorizontal: 20,
-    paddingTop: 10,
-    paddingBottom: 15,
+    paddingHorizontal: width * 0.05,
+    marginBottom: 20,
   },
   backButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
-    alignSelf: 'flex-start',
-    gap: 6,
+    marginBottom: 15,
+    gap: 4,
   },
   backText: {
     color: '#FFFFFF',
-    fontSize: 17,
+    fontSize: width * 0.045,
     fontWeight: '600',
   },
   titleRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    gap: 10,
   },
   title: {
     color: '#FFFFFF',
-    fontSize: 32,
-    fontWeight: 'bold',
+    fontSize: width * 0.08, // Dynamic font size based on screen width
+    fontWeight: '800',
     flex: 1,
   },
   recordButton: {
     backgroundColor: '#22c55e',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 24,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 6,
-    marginLeft: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 20,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   recordButtonText: {
     color: '#FFFFFF',
-    fontSize: 14,
+    fontSize: width * 0.035,
     fontWeight: 'bold',
   },
   emptyContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 40,
-    marginTop: 100,
+    paddingHorizontal: width * 0.1,
+    marginTop: height * 0.1,
   },
   emptyText: {
     color: '#FFFFFF',
-    fontSize: 24,
+    fontSize: width * 0.06,
     fontWeight: 'bold',
     marginTop: 20,
   },
   emptySubtext: {
     color: 'rgba(255,255,255,0.7)',
-    fontSize: 16,
+    fontSize: width * 0.04,
     textAlign: 'center',
     marginTop: 10,
   },
   talesList: {
-    paddingHorizontal: 20,
-    paddingTop: 15,
-    gap: 14,
+    paddingHorizontal: width * 0.05,
+    gap: 12,
   },
   taleCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    borderRadius: 18,
-    padding: 18,
+    backgroundColor: "#0d5a9d",
+    borderRadius: 16,
+    padding: width * 0.04,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 4,
-    minHeight: 88,
   },
   taleInfo: {
     flex: 1,
-    paddingRight: 12,
+    paddingRight: 10,
   },
   taleTitle: {
     color: '#FFFFFF',
-    fontSize: 18,
+    fontSize: width * 0.045,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom: 4,
   },
   taleDetails: {
-    color: '#FFFFFF',
-    fontSize: 13,
-    opacity: 0.8,
+    color: 'rgba(255, 255, 255, 0.7)',
+    fontSize: width * 0.032,
   },
   actionButtons: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 12,
     alignItems: 'center',
   },
   playButton: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: width * 0.12,
+    height: width * 0.12,
+    borderRadius: (width * 0.12) / 2,
     backgroundColor: '#ec4899',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#ec4899',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 5,
-    elevation: 6,
   },
   deleteButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    width: width * 0.1,
+    height: width * 0.1,
+    borderRadius: (width * 0.1) / 2,
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
     justifyContent: 'center',
     alignItems: 'center',
   },

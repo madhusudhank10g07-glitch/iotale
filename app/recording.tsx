@@ -14,6 +14,7 @@ import { Audio } from 'expo-av';
 import SaveRecordingModal from '@/components/pages/SaveRecordingModal';
 import { uploadAudioFile, saveTale } from '../lib/talesService';
 import { supabase } from '../lib/supabase';
+import BackgroundPage from '@/components/props/peppabg';
 
 type RecordingState = 'countdown' | 'recording' | 'paused' | 'stopped';
 
@@ -264,6 +265,9 @@ const DIYRecordingPage = () => {
   };
 
   return (
+     <BackgroundPage
+      backgroundSource={require('../assets/images/bg/diynumber.png')}
+    > 
     <View style={styles.container}>
       {/* Back Button */}
       <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
@@ -401,13 +405,13 @@ const DIYRecordingPage = () => {
         onClose={() => setShowSaveModal(false)}
       />
     </View>
+    </BackgroundPage>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#8B5CF6',
     paddingTop: 60,
     paddingHorizontal: 20,
   },
@@ -496,6 +500,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 30,
     paddingHorizontal: 20,
+    marginTop: 30,
+    gap: 20,
   },
   controlButton: {
     width: 60,

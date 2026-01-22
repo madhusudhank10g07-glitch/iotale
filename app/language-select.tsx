@@ -14,6 +14,10 @@ import {
 import { useRouter } from 'expo-router';
 import { useLanguage, languagesList as languages } from '../contexts/LanguageContext';
 import BackgroundPage from '@/components/props/peppabg';
+import { Image } from "react-native";
+
+
+
 const LanguageSelectionPage = () => {
   const navigation = useNavigation();
   const handleBack = () => {
@@ -120,32 +124,48 @@ const LanguageSelectionPage = () => {
       <View style={styles.bottomNav}>
         <TouchableOpacity 
           style={styles.navItem}
-          onPress={() => handleNavigation('Profile')}
+          onPress={() => router.push('/profile')}
         >
-          <View style={styles.navIcon}>
-            <Text style={styles.navIconText}>👤</Text>
-          </View>
+          <Image
+              source={require("@/assets/icons/profico.png")}
+              style={{
+                width: 28,
+                height: 28, 
+                resizeMode: 'contain',
+              }}
+            />
           <Text style={styles.navLabel}>Profile</Text>
         </TouchableOpacity>
 
         <TouchableOpacity 
           style={styles.navItem}
-          onPress={() => handleNavigation('MyTales')}
+          onPress={() => router.push('/diy-tales')}
         >
-          <View style={[styles.navIcon, styles.activeNavIcon]}>
-            <Text style={styles.navIconText}>📖</Text>
-          </View>
+         <Image
+              source={require("@/assets/icons/mytales.png")}
+              style={{
+                width: 28,
+                height: 28, 
+                resizeMode: 'contain',
+              }}
+            />
           <Text style={[styles.navLabel, styles.activeNavLabel]}>My Tales</Text>
         </TouchableOpacity>
 
         <TouchableOpacity 
           style={styles.navItem}
-          onPress={() => handleNavigation('DiyTales')}
+          onPress={() => router.push('/diy-tales')}
         >
-          <View style={styles.navIcon}>
-            <Text style={styles.navIconText}>📚</Text>
-          </View>
-          <Text style={styles.navLabel}>Diy Tales</Text>
+          <Image
+              source={require("@/assets/icons/diytales.png")}
+              style={{
+                width: 28,
+                height: 28, 
+                resizeMode: 'contain',
+              }}
+            />
+                      <Text style={[styles.navLabel, styles.activeNavLabel]}>diy Tales</Text>
+
         </TouchableOpacity>
       </View>
     </View>
@@ -216,6 +236,7 @@ const styles = StyleSheet.create({
   flatList: {
     flex: 1,
     paddingHorizontal: 20,
+    backgroundColor: "#0d5a9d",
   },
   listContent: {
     paddingBottom: 120,
@@ -237,6 +258,7 @@ const styles = StyleSheet.create({
     elevation: 6,
     minHeight: 85,
     marginBottom: 16,
+    backgroundColor:"#0d5a9d",
   },
   selectedCard: {
     backgroundColor: '#F492B5',
@@ -296,10 +318,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    paddingVertical: 16,
+    paddingVertical: 10,
     paddingHorizontal: 20,
-    paddingBottom: 25,
-    backgroundColor: 'rgba(30, 64, 175, 0.95)',
+    paddingBottom: 20,
+    backgroundColor: "#0d5a9d",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     shadowColor: '#000',
@@ -309,15 +331,15 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     shadowRadius: 5,
-    elevation: 10,
+
   },
   navItem: {
     alignItems: 'center',
     flex: 1,
   },
   navIcon: {
-    width: 48,
-    height: 48,
+    width: 38,
+    height: 38,
     borderRadius: 24,
     backgroundColor: 'rgba(255, 255, 255, 0.15)',
     justifyContent: 'center',

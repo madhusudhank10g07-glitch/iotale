@@ -1,51 +1,52 @@
+// app/peppatales.tsx
+
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native'
 import { useRouter } from 'expo-router'
-import BackgroundPage from "@/components/props/peppabg";
+import BackgroundPage from "@/components/props/peppabg"
+import { CATEGORY_FOLDERS } from '@/constants/supabaseConfig'
 
-const TALES = [
-  {
-    id: '1',
-    title: 'Learn with Peppa',
-    image: require('../assets/images/home/learn-with-peppa.png'),
-  },
-  {
-    id: '2',
-    title: 'Bedtime Stories with Peppa',
-    image: require('../assets/images/home/bedtime-stories.png'),
-  },
-]
+// Map category id → local image
+const CATEGORY_IMAGES: Record<string, any> = {
+  learn:   require('../assets/images/home/learn-with-peppa.png'),
+  bedtime: require('../assets/images/home/bedtime-stories.png'),
+}
 
 export default function TalesScreen() {
   const router = useRouter()
 
   return (
-    <BackgroundPage backgroundSource={require("../assets/images/bg/tales.png")}>
+    <BackgroundPage backgroundSource={require('../assets/images/bg/tales.png')}>
 
-      {/* Back Button */}
-      <TouchableOpacity style={styles.backButton} onPress={() => router.back()} activeOpacity={0.8} >
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => router.back()}
+        activeOpacity={0.8}
+      >
         <Text style={styles.backButtonText}>← Back</Text>
       </TouchableOpacity>
 
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-
-        {TALES.map((tale) => (
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        {CATEGORY_FOLDERS.map((cat) => (
           <TouchableOpacity
-            key={tale.id}
-            activeOpacity={0.85}
-           onPress={() => router.push(`/taleperform?id=${tale.id}`)}
-          >
+  key={cat.id}
+  activeOpacity={0.85}
+  onPress={() => router.push(`/taleperform?id=${cat.id}`)}
+>
             <View style={styles.imageWrapper}>
               <Image
-                source={tale.image}
+                source={CATEGORY_IMAGES[cat.id]}
                 style={styles.taleImage}
-                resizeMode="contain"   // ← shows full image, no cropping
+                resizeMode="contain"
               />
             </View>
-            <Text style={styles.taleTitle}>{tale.title}</Text>
+            <Text style={styles.taleTitle}>{cat.title}</Text>
           </TouchableOpacity>
         ))}
-
       </ScrollView>
+
     </BackgroundPage>
   )
 }
@@ -54,10 +55,9 @@ const styles = StyleSheet.create({
   backButton: {
     alignSelf: 'flex-start',
     marginTop: 16,
-    marginLeft: 20, 
+    marginLeft: 20,
     paddingVertical: 8,
     paddingHorizontal: 16,
-   
   },
   backButtonText: {
     fontSize: 16,
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(0,0,0,0.3)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
-    marginTop:28,
+    marginTop: 28,
   },
   scrollContent: {
     paddingHorizontal: 24,
@@ -76,17 +76,17 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   imageWrapper: {
-    width: 360,   // ← was 320
+    width: 360,
     height: 240,
     borderRadius: 16,
     overflow: 'hidden',
-    backgroundColor: 'transparent',  // ← no background fill, clean look
+    backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
   },
   taleImage: {
-    width: 360,   // ← was 320
-    height: 240,  // same fixed dimensions as wrapper
+    width: 360,
+    height: 240,
   },
   taleTitle: {
     fontSize: 22,

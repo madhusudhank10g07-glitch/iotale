@@ -177,31 +177,33 @@ import {
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import BackgroundPage from '@/components/props/peppabg'
 import { useSupabaseAudioList, RemoteTrack } from '@/hooks/useSupabaseAudioList'
-import { useAudioDownload ,getLocalPath} from '@/hooks/useAudioDownload'
+import { useAudioDownload } from '@/hooks/useAudioDownload'
 import { CATEGORY_FOLDERS } from '@/constants/supabaseConfig'
 
 // ─── Single track card ───────────────────────────────────────────────────────
 
 function TrackCard({ track }: { track: RemoteTrack }) {
   const router = useRouter()
-  const { isDownloaded, isDownloading, progress, error, download } =
+  const { isDownloaded, isDownloading, progress, error, download, audioUri } =
     useAudioDownload(track)
 
-  function handlePress() {
-    if (isDownloaded) {
-      router.push({
-        pathname: '/perform',
-        params: {
-          trackId: track.id,
-          uri: getLocalPath(track.fileName),
-          title: track.title,
-          categoryTitle: track.categoryTitle,
-        },
-      })
-    } else {
-      download()
+  async function handlePress() {
+    if (!isDownloaded) {
+      await download()
+      return
     }
+
+    router.push({
+      pathname: '/perform',
+      params: {
+        uri: encodeURIComponent(audioUri),
+        title: track.title,
+        categoryTitle: track.categoryTitle,
+      },
+    })
   }
+
+
 
   const fileMB = track.fileSizeBytes
     ? `${(track.fileSizeBytes / 1024 / 1024).toFixed(1)} MB`

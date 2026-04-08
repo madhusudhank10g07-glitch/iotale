@@ -59,7 +59,7 @@ export function useSupabaseAudioList() {
         if (!res.ok) throw new Error(`Failed to list ${cat.folder}: ${res.status}`)
 
         const files: any[] = await res.json()
-        console.log(`[${cat.folder}] response:`, JSON.stringify(files))
+        // console.log(`[${cat.folder}] response:`, JSON.stringify(files))
         if (!Array.isArray(files)) continue
 
         for (const file of files) {

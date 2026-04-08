@@ -22,6 +22,7 @@ import {
   User,
 } from 'lucide-react-native'
 import { useAudioDownload } from '@/hooks/useAudioDownload'
+import BackgroundPage from '@/components/props/peppabg'
 
 const { height } = Dimensions.get('window')
 
@@ -102,15 +103,11 @@ export default function StartTalesScreen() {
   }
 
   return (
+    <BackgroundPage
+            backgroundSource={require("../assets/images/bg/talereading.png")}
+          >
     <View style={styles.container}>
-      <View style={styles.backgroundContainer}>
-        <Image
-          source={{
-            uri: 'https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?q=80&w=800&auto=format&fit=crop',
-          }}
-          style={styles.backgroundImage}
-        />
-      </View>
+      
 
       <View style={styles.header}>
         <TouchableOpacity
@@ -193,11 +190,12 @@ export default function StartTalesScreen() {
         </TouchableOpacity>
       </View>
     </View>
+    </BackgroundPage>
   )
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0b2756' },
+  container: { flex: 1 },
   backgroundContainer: {
     position: 'absolute', top: 0, left: 0,
     width: '100%', height: height * 0.5, opacity: 0.35,

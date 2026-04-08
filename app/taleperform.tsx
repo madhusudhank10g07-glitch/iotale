@@ -10,30 +10,7 @@ import BackgroundPage from '@/components/props/peppabg'
 import { useSupabaseAudioList, RemoteTrack } from '@/hooks/useSupabaseAudioList'
 import { useAudioDownload } from '@/hooks/useAudioDownload'
 import { CATEGORY_FOLDERS } from '@/constants/supabaseConfig'
-
-// ─── Single track card ───────────────────────────────────────────────────────
-
-// function TrackCard({ track }: { track: RemoteTrack }) {
-//   const router = useRouter()
-//   const { isDownloaded, isDownloading, progress, error, download, audioUri } =
-//     useAudioDownload(track)
-
-//   async function handlePress() {
-//     if (!isDownloaded) {
-//       await download()
-//       return
-//     }
-
-//     router.push({
-//       pathname: '/starttales',
-//       params: {
-//         uri: encodeURIComponent(audioUri),
-//         title: track.title,
-//         categoryTitle: track.categoryTitle,
-//       },
-//     })
-//   }
-
+ 
 function TrackCard({ track }: { track: RemoteTrack }) {
   const router = useRouter()
   const { isDownloaded, isDownloading, progress, error, download, audioUri } =

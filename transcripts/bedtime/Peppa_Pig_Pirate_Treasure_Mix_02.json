@@ -1,0 +1,752 @@
+[
+  {
+    "text": "Pirate treasure.",
+    "start": 0,
+    "end": 1200
+  },
+  {
+    "text": "Danny Dog",
+    "start": 1200,
+    "end": 2000
+  },
+  {
+    "text": "is playing",
+    "start": 2000,
+    "end": 2800
+  },
+  {
+    "text": "in his pirate den.",
+    "start": 2800,
+    "end": 4000
+  },
+  {
+    "text": "Here are Peppa",
+    "start": 4000,
+    "end": 5000
+  },
+  {
+    "text": "and her friends.",
+    "start": 5000,
+    "end": 6000
+  },
+  {
+    "text": "Hello, Danny.",
+    "start": 6000,
+    "end": 7000
+  },
+  {
+    "text": "Hello, everyone.",
+    "start": 7000,
+    "end": 8500
+  },
+  {
+    "text": "Do you want",
+    "start": 8500,
+    "end": 9500
+  },
+  {
+    "text": "to play pirates?",
+    "start": 9500,
+    "end": 11000
+  },
+  {
+    "text": "Yes.",
+    "start": 11000,
+    "end": 12000
+  },
+  {
+    "text": "Get dressed up then.",
+    "start": 12000,
+    "end": 14000
+  },
+  {
+    "text": "Danny Dog has",
+    "start": 14000,
+    "end": 15200
+  },
+  {
+    "text": "a dressing up box",
+    "start": 15200,
+    "end": 16500
+  },
+  {
+    "text": "full of pirate clothes.",
+    "start": 16500,
+    "end": 18500
+  },
+  {
+    "text": "Hearties.",
+    "start": 18500,
+    "end": 19500
+  },
+  {
+    "text": "I've got a treasure chest.",
+    "start": 19500,
+    "end": 21500
+  },
+  {
+    "text": "Ooh, it's a biscuit tin.",
+    "start": 21500,
+    "end": 23500
+  },
+  {
+    "text": "It's a treasure chest,",
+    "start": 23500,
+    "end": 25000
+  },
+  {
+    "text": "but it's still got biscuits in.",
+    "start": 25000,
+    "end": 27500
+  },
+  {
+    "text": "Uh, who wants a biscuit?",
+    "start": 27500,
+    "end": 29500
+  },
+  {
+    "text": "Now it's a treasure chest.",
+    "start": 29500,
+    "end": 31500
+  },
+  {
+    "text": "Let's find some treasure",
+    "start": 31500,
+    "end": 33500
+  },
+  {
+    "text": "to put in it.",
+    "start": 33500,
+    "end": 35000
+  },
+  {
+    "text": "Someone has to stay here",
+    "start": 35000,
+    "end": 37000
+  },
+  {
+    "text": "to guard the pirate ship.",
+    "start": 37000,
+    "end": 39000
+  },
+  {
+    "text": "me.",
+    "start": 39000,
+    "end": 40000
+  },
+  {
+    "text": "I will guard it.",
+    "start": 40000,
+    "end": 41500
+  },
+  {
+    "text": "Pedro Pony wants",
+    "start": 41500,
+    "end": 43000
+  },
+  {
+    "text": "to guard the pirate ship.",
+    "start": 43000,
+    "end": 45000
+  },
+  {
+    "text": "If you see someone coming,",
+    "start": 45000,
+    "end": 47000
+  },
+  {
+    "text": "shout, \"Stop.\"",
+    "start": 47000,
+    "end": 48500
+  },
+  {
+    "text": "Who goes there?",
+    "start": 48500,
+    "end": 50000
+  },
+  {
+    "text": "Stop.",
+    "start": 50000,
+    "end": 51000
+  },
+  {
+    "text": "Uh, who goes there?",
+    "start": 51000,
+    "end": 53000
+  },
+  {
+    "text": "Okay, let's go find",
+    "start": 53000,
+    "end": 54500
+  },
+  {
+    "text": "some treasure.",
+    "start": 54500,
+    "end": 56000
+  },
+  {
+    "text": "Danny Dog likes",
+    "start": 56000,
+    "end": 57500
+  },
+  {
+    "text": "being a pirate.",
+    "start": 57500,
+    "end": 59000
+  },
+  {
+    "text": "Everyone likes",
+    "start": 59000,
+    "end": 60500
+  },
+  {
+    "text": "being a pirate.",
+    "start": 60500,
+    "end": 62000
+  },
+  {
+    "text": "A joy.",
+    "start": 62000,
+    "end": 63000
+  },
+  {
+    "text": "We s the deep blue sea",
+    "start": 63000,
+    "end": 65500
+  },
+  {
+    "text": "to find a golden treasure",
+    "start": 65500,
+    "end": 67500
+  },
+  {
+    "text": "for Santa.",
+    "start": 67500,
+    "end": 68500
+  },
+  {
+    "text": "Danny has found",
+    "start": 68500,
+    "end": 70000
+  },
+  {
+    "text": "a pine cone.",
+    "start": 70000,
+    "end": 71500
+  },
+  {
+    "text": "Treasure.",
+    "start": 71500,
+    "end": 72500
+  },
+  {
+    "text": "Peppa has found a shell.",
+    "start": 72500,
+    "end": 74500
+  },
+  {
+    "text": "Treasure.",
+    "start": 74500,
+    "end": 75500
+  },
+  {
+    "text": "Suzy has found",
+    "start": 75500,
+    "end": 77000
+  },
+  {
+    "text": "an old bit of rope.",
+    "start": 77000,
+    "end": 79000
+  },
+  {
+    "text": "Treasure.",
+    "start": 79000,
+    "end": 80000
+  },
+  {
+    "text": "Freddy has found a pebble.",
+    "start": 80000,
+    "end": 82000
+  },
+  {
+    "text": "Treasure.",
+    "start": 82000,
+    "end": 83000
+  },
+  {
+    "text": "Pirate Pedro is",
+    "start": 83000,
+    "end": 84500
+  },
+  {
+    "text": "feeling sleepy.",
+    "start": 84500,
+    "end": 86000
+  },
+  {
+    "text": "Oh, just Have",
+    "start": 86000,
+    "end": 87000
+  },
+  {
+    "text": "a little sleep.",
+    "start": 87000,
+    "end": 88500
+  },
+  {
+    "text": "Pedro always takes",
+    "start": 88500,
+    "end": 90000
+  },
+  {
+    "text": "his glasses off",
+    "start": 90000,
+    "end": 91500
+  },
+  {
+    "text": "before he sleeps.",
+    "start": 91500,
+    "end": 93000
+  },
+  {
+    "text": "Let's creep up on Pedro.",
+    "start": 93000,
+    "end": 95500
+  },
+  {
+    "text": "Yes,",
+    "start": 95500,
+    "end": 96500
+  },
+  {
+    "text": "Danny, Peppa, Susie,",
+    "start": 96500,
+    "end": 98500
+  },
+  {
+    "text": "and Freddy are creeping",
+    "start": 98500,
+    "end": 100500
+  },
+  {
+    "text": "up on Pedro.",
+    "start": 100500,
+    "end": 102000
+  },
+  {
+    "text": "You were asleep.",
+    "start": 102000,
+    "end": 103500
+  },
+  {
+    "text": "Uh, yes.",
+    "start": 103500,
+    "end": 104500
+  },
+  {
+    "text": "Sorry.",
+    "start": 104500,
+    "end": 105500
+  },
+  {
+    "text": "You're lucky",
+    "start": 105500,
+    "end": 106500
+  },
+  {
+    "text": "we're friendly pirates.",
+    "start": 106500,
+    "end": 108500
+  },
+  {
+    "text": "We've got treasure.",
+    "start": 108500,
+    "end": 110000
+  },
+  {
+    "text": "That's nice.",
+    "start": 110000,
+    "end": 111000
+  },
+  {
+    "text": "The friendly pirates have laid out",
+    "start": 111000,
+    "end": 114000
+  },
+  {
+    "text": "their treasure",
+    "start": 114000,
+    "end": 115000
+  },
+  {
+    "text": "next to Pedro's glasses.",
+    "start": 115000,
+    "end": 117500
+  },
+  {
+    "text": "Let's put it",
+    "start": 117500,
+    "end": 118500
+  },
+  {
+    "text": "in the treasure chest.",
+    "start": 118500,
+    "end": 120000
+  },
+  {
+    "text": "Everything goes",
+    "start": 120000,
+    "end": 121500
+  },
+  {
+    "text": "into the treasure chest.",
+    "start": 121500,
+    "end": 123500
+  },
+  {
+    "text": "Now we can bury it.",
+    "start": 123500,
+    "end": 125000
+  },
+  {
+    "text": "Yes.",
+    "start": 125000,
+    "end": 126000
+  },
+  {
+    "text": "And I'll stay here",
+    "start": 126000,
+    "end": 127500
+  },
+  {
+    "text": "and guard the pirate ship.",
+    "start": 127500,
+    "end": 129500
+  },
+  {
+    "text": "Okay, pirate Pedro.",
+    "start": 129500,
+    "end": 131000
+  },
+  {
+    "text": "But don't fall asleep this time.",
+    "start": 131000,
+    "end": 134000
+  },
+  {
+    "text": "I won't.",
+    "start": 134000,
+    "end": 135000
+  },
+  {
+    "text": "Hooray.",
+    "start": 135000,
+    "end": 136000
+  },
+  {
+    "text": "The pirates are off",
+    "start": 136000,
+    "end": 137500
+  },
+  {
+    "text": "to bury the treasure.",
+    "start": 137500,
+    "end": 139500
+  },
+  {
+    "text": "chest over a hill",
+    "start": 139500,
+    "end": 141000
+  },
+  {
+    "text": "round the little bush.",
+    "start": 141000,
+    "end": 143000
+  },
+  {
+    "text": "Let's bury it here.",
+    "start": 143000,
+    "end": 144500
+  },
+  {
+    "text": "How will we know",
+    "start": 144500,
+    "end": 146000
+  },
+  {
+    "text": "where we've buried it?",
+    "start": 146000,
+    "end": 148000
+  },
+  {
+    "text": "Let's make a treasure map.",
+    "start": 148000,
+    "end": 150000
+  },
+  {
+    "text": "Over the hill,",
+    "start": 150000,
+    "end": 151500
+  },
+  {
+    "text": "round the little bush,",
+    "start": 151500,
+    "end": 153000
+  },
+  {
+    "text": "and X marks the spot.",
+    "start": 153000,
+    "end": 155000
+  },
+  {
+    "text": "X marks the spot.",
+    "start": 155000,
+    "end": 156500
+  },
+  {
+    "text": "Danny Dog has drawn",
+    "start": 156500,
+    "end": 158500
+  },
+  {
+    "text": "an X on the ground.",
+    "start": 158500,
+    "end": 160500
+  },
+  {
+    "text": "Pedro has fallen asleep.",
+    "start": 160500,
+    "end": 162500
+  },
+  {
+    "text": "again.",
+    "start": 162500,
+    "end": 163500
+  },
+  {
+    "text": "I'm awake.",
+    "start": 163500,
+    "end": 164500
+  },
+  {
+    "text": "I'm awake.",
+    "start": 164500,
+    "end": 165500
+  },
+  {
+    "text": "Pedro, don't you wear glasses?",
+    "start": 165500,
+    "end": 168000
+  },
+  {
+    "text": "Pedro is not wearing",
+    "start": 168000,
+    "end": 170000
+  },
+  {
+    "text": "his glasses.",
+    "start": 170000,
+    "end": 171500
+  },
+  {
+    "text": "Uh, hello.",
+    "start": 171500,
+    "end": 172500
+  },
+  {
+    "text": "Mummy pony has come",
+    "start": 172500,
+    "end": 174500
+  },
+  {
+    "text": "to collect Pedro.",
+    "start": 174500,
+    "end": 176500
+  },
+  {
+    "text": "Who goes there?",
+    "start": 176500,
+    "end": 178000
+  },
+  {
+    "text": "I'm your mommy.",
+    "start": 178000,
+    "end": 179500
+  },
+  {
+    "text": "Pedro.",
+    "start": 179500,
+    "end": 180500
+  },
+  {
+    "text": "Pedro cannot see very well",
+    "start": 180500,
+    "end": 183000
+  },
+  {
+    "text": "without his glasses.",
+    "start": 183000,
+    "end": 185000
+  },
+  {
+    "text": "Where are your glasses?",
+    "start": 185000,
+    "end": 187000
+  },
+  {
+    "text": "Um, I don't know.",
+    "start": 187000,
+    "end": 189000
+  },
+  {
+    "text": "Mommy,",
+    "start": 189000,
+    "end": 190000
+  },
+  {
+    "text": "when did you last have them?",
+    "start": 190000,
+    "end": 192500
+  },
+  {
+    "text": "When we put the treasure",
+    "start": 192500,
+    "end": 194500
+  },
+  {
+    "text": "into the A treasure chest.",
+    "start": 194500,
+    "end": 197000
+  },
+  {
+    "text": "What treasure chest?",
+    "start": 197000,
+    "end": 199000
+  },
+  {
+    "text": "The one we buried",
+    "start": 199000,
+    "end": 200500
+  },
+  {
+    "text": "in the garden.",
+    "start": 200500,
+    "end": 202000
+  },
+  {
+    "text": "Pedro's glasses are buried",
+    "start": 202000,
+    "end": 204500
+  },
+  {
+    "text": "in the garden.",
+    "start": 204500,
+    "end": 206000
+  },
+  {
+    "text": "Oh dear.",
+    "start": 206000,
+    "end": 207000
+  },
+  {
+    "text": "How are we going",
+    "start": 207000,
+    "end": 208500
+  },
+  {
+    "text": "to find them now?",
+    "start": 208500,
+    "end": 210500
+  },
+  {
+    "text": "We've got a treasure map.",
+    "start": 210500,
+    "end": 212500
+  },
+  {
+    "text": "Mummy Pony is using Peppa's map",
+    "start": 212500,
+    "end": 215500
+  },
+  {
+    "text": "to find the buried treasure.",
+    "start": 215500,
+    "end": 218500
+  },
+  {
+    "text": "Over the hill,",
+    "start": 218500,
+    "end": 219500
+  },
+  {
+    "text": "round the little bush,",
+    "start": 219500,
+    "end": 221000
+  },
+  {
+    "text": "and X marks the spot.",
+    "start": 221000,
+    "end": 223500
+  },
+  {
+    "text": "Freddy is digging up",
+    "start": 223500,
+    "end": 225500
+  },
+  {
+    "text": "the treasure.",
+    "start": 225500,
+    "end": 226500
+  },
+  {
+    "text": "They have found the treasure.",
+    "start": 226500,
+    "end": 229000
+  },
+  {
+    "text": "My glasses.",
+    "start": 229000,
+    "end": 230000
+  },
+  {
+    "text": "Hoor.",
+    "start": 230000,
+    "end": 231000
+  },
+  {
+    "text": "Thank you.",
+    "start": 231000,
+    "end": 232000
+  },
+  {
+    "text": "Treasure maps are very useful,",
+    "start": 232000,
+    "end": 235000
+  },
+  {
+    "text": "especially for finding your glasses",
+    "start": 235000,
+    "end": 238000
+  },
+  {
+    "text": "if you accidentally bury them.",
+    "start": 238000,
+    "end": 241000
+  },
+  {
+    "text": "Oh, we seen treasure.",
+    "start": 241000,
+    "end": 243500
+  },
+  {
+    "text": "Oh, jolly pirates.",
+    "start": 243500,
+    "end": 245500
+  },
+  {
+    "text": "We sa",
+    "start": 245500,
+    "end": 246500
+  }
+]

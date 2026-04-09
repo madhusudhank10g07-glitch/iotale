@@ -98,6 +98,7 @@ export default function StartTalesScreen() {
         uri: encodeURIComponent(localAudioUri),
         title,
         categoryTitle,
+        fileName: fileName ?? '',
       },
     })
   }

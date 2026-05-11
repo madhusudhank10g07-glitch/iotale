@@ -357,14 +357,14 @@ function BlobCard({ track, colorIndex }: { track: RemoteTrack; colorIndex: numbe
           {track.title}
         </Text>
 
-        <View style={styles.blobFooter}>
+        {/* <View style={styles.blobFooter}>
           <Text style={[styles.blobIcon, { color: palette.text }]}>🎵</Text>
           {fileMB ? (
             <Text style={[styles.blobSize, { color: palette.text, opacity: 0.8 }]}>
               {fileMB}
             </Text>
           ) : null}
-        </View>
+        </View> */}
 
         {/* Auto-download progress bar */}
         {isDownloading && (

@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'rea
 import { useRouter } from 'expo-router'
 import BackgroundPage from "@/components/props/peppabg"
 import { CATEGORY_FOLDERS } from '@/constants/supabaseConfig'
-
+import { Fonts, Typography } from '@/constants/theme';
 // Map category id → local image
 const CATEGORY_IMAGES: Record<string, any> = {
   learn:   require('../assets/images/home/learn-with-peppa.png'),
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   backButtonText: {
+    fontFamily: Fonts.bold,
     fontSize: 16,
-    fontWeight: '700',
     color: '#FFFFFF',
     textShadowColor: 'rgba(0,0,0,0.3)',
     textShadowOffset: { width: 1, height: 1 },
@@ -89,8 +89,8 @@ const styles = StyleSheet.create({
     height: 240,
   },
   taleTitle: {
+    fontFamily: Fonts.bold,
     fontSize: 22,
-    fontWeight: 'bold',
     color: '#FFFFFF',
     textAlign: 'center',
     paddingVertical: 16,

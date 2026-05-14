@@ -23,7 +23,7 @@ import {
   Tale,
 } from '../lib/talesService';
 import BackgroundPage from '@/components/props/peppabg';
-
+import { Fonts, Typography } from '@/constants/theme';
 const { width, height } = Dimensions.get('window');
 
 const DIYListPage = () => {
@@ -163,7 +163,7 @@ const DIYListPage = () => {
 
             <View style={styles.titleRow}>
               <Text style={styles.title} numberOfLines={1} adjustsFontSizeToFit>
-                My DIY Tales
+               DIY Tales
               </Text>
               <TouchableOpacity style={styles.recordButton} onPress={handleRecordNew}>
                 <Ionicons name="add" size={18} color="#FFFFFF" />
@@ -218,7 +218,6 @@ const DIYListPage = () => {
     </BackgroundPage>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -229,7 +228,7 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     color: '#FFFFFF',
-    fontSize: width * 0.04,
+    fontFamily: Fonts.regular,
     marginTop: 16,
   },
   scrollView: {
@@ -253,8 +252,7 @@ const styles = StyleSheet.create({
   },
   backText: {
     color: '#FFFFFF',
-    fontSize: width * 0.045,
-    fontWeight: '600',
+    fontFamily: Fonts.medium,
   },
   titleRow: {
     flexDirection: 'row',
@@ -262,11 +260,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
   },
+  // title: {
+  //   color: '#FFFFFF',
+  //   fontSize: width * 0.08, // Dynamic font size based on screen width
+  //   fontWeight: '800',
+  //   flex: 1,
+  // },
   title: {
-    color: '#FFFFFF',
-    fontSize: width * 0.08, // Dynamic font size based on screen width
-    fontWeight: '800',
+    fontFamily: Fonts.bold, 
+    fontSize: width * 0.08,
     flex: 1,
+    color: '#FFFFFF',
   },
   recordButton: {
     backgroundColor: '#22c55e',
@@ -284,8 +288,7 @@ const styles = StyleSheet.create({
   },
   recordButtonText: {
     color: '#FFFFFF',
-    fontSize: width * 0.035,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
   },
   emptyContainer: {
     flex: 1,
@@ -296,13 +299,12 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     color: '#FFFFFF',
-    fontSize: width * 0.06,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     marginTop: 20,
   },
   emptySubtext: {
     color: 'rgba(255,255,255,0.7)',
-    fontSize: width * 0.04,
+    fontFamily: Fonts.regular,
     textAlign: 'center',
     marginTop: 10,
   },
@@ -324,13 +326,12 @@ const styles = StyleSheet.create({
   },
   taleTitle: {
     color: '#FFFFFF',
-    fontSize: width * 0.045,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     marginBottom: 4,
   },
   taleDetails: {
     color: 'rgba(255, 255, 255, 0.7)',
-    fontSize: width * 0.032,
+    fontFamily: Fonts.regular,
   },
   actionButtons: {
     flexDirection: 'row',

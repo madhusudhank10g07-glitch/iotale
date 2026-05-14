@@ -15,6 +15,8 @@ import { useRouter } from 'expo-router';
 import { useLanguage, languagesList as languages } from '../contexts/LanguageContext';
 import BackgroundPage from '@/components/props/peppabg';
 import { Image } from "react-native";
+import { Fonts, Typography } from '@/constants/theme';
+
 
 
 
@@ -92,8 +94,7 @@ const LanguageSelectionPage = () => {
 
       {/* Header Section */}
       <View style={styles.headerSection}>
-        <Text style={styles.title}>{t('chooseLanguage')}</Text>
-        <Text style={styles.subtitle}>Choose your language</Text>
+        <Text style={styles.title}>{t('Choose Language')}</Text> 
       </View>
 
       {/* Search Input */}
@@ -172,7 +173,6 @@ const LanguageSelectionPage = () => {
         </BackgroundPage>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -192,13 +192,14 @@ const styles = StyleSheet.create({
   backArrow: {
     color: '#FFFFFF',
     fontSize: 22,
-    fontWeight: '600',
+    fontFamily: Fonts.medium,
     marginRight: 6,
   },
   backText: {
     color: '#FFFFFF',
     fontSize: 17,
-    fontWeight: '600',
+    fontFamily: Fonts.bold,
+  
   },
   headerSection: {
     alignItems: 'center',
@@ -207,8 +208,8 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#FFFFFF',
-    fontSize: 36,
-    fontWeight: 'bold',
+    fontSize: 34,
+    fontFamily: Fonts.bold,
     marginBottom: 12,
     textAlign: 'center',
   },
@@ -218,6 +219,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     opacity: 0.95,
     lineHeight: 26,
+    fontFamily: Fonts.regular,
   },
   searchContainer: {
     paddingHorizontal: 20,
@@ -232,6 +234,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.3)',
+    fontFamily: Fonts.regular,
   },
   flatList: {
     flex: 1,
@@ -288,13 +291,14 @@ const styles = StyleSheet.create({
   languageName: {
     color: '#FFFFFF',
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     marginBottom: 4,
   },
   languageSubtitle: {
     color: '#FFFFFF',
     fontSize: 14,
     opacity: 0.9,
+    fontFamily: Fonts.regular,
   },
   checkmarkContainer: {
     width: 32,
@@ -308,7 +312,7 @@ const styles = StyleSheet.create({
   checkmark: {
     color: '#F492B5',
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
   },
   bottomNav: {
     position: 'absolute',
@@ -363,12 +367,12 @@ const styles = StyleSheet.create({
   navLabel: {
     color: '#FFFFFF',
     fontSize: 13,
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     opacity: 0.8,
   },
   activeNavLabel: {
     opacity: 1,
-    fontWeight: '600',
+    fontFamily: Fonts.medium,
   },
 });
 

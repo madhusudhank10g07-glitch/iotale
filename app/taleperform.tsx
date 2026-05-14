@@ -245,6 +245,7 @@ import BackgroundPage from '@/components/props/peppabg'
 import { useSupabaseAudioList, RemoteTrack } from '@/hooks/useSupabaseAudioList'
 import { useAudioDownload } from '@/hooks/useAudioDownload'
 import { CATEGORY_FOLDERS } from '@/constants/supabaseConfig'
+import { Fonts, Typography } from '@/constants/theme';
 
 const BLOB_IMAGE = require('../assets/images/bg/group.png')
 
@@ -451,7 +452,6 @@ export default function TalesPerformScreen() {
 }
 
 // ─── Styles ───────────────────────────────────────────────────────────────────
-
 const styles = StyleSheet.create({
   backButton: {
     alignSelf: 'flex-start',
@@ -459,18 +459,23 @@ const styles = StyleSheet.create({
     paddingVertical: 8, paddingHorizontal: 16,
   },
   backButtonText: {
-    fontSize: 16, fontWeight: '700', color: '#FFFFFF',
+    fontSize: 16,
+    fontFamily: Fonts.bold,
+    color: '#FFFFFF',
     textShadowColor: 'rgba(0,0,0,0.3)',
     textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 2,
   },
   pageTitle: {
-    fontSize: 28, fontWeight: '900', color: '#FFFFFF',
+    fontSize: 28,
+    fontFamily: Fonts.medium,
+    color: '#FFFFFF',
     marginLeft: 24, marginTop: 4,
     textShadowColor: 'rgba(0,0,0,0.3)',
     textShadowOffset: { width: 1, height: 2 }, textShadowRadius: 4,
   },
   pageSubtitle: {
-    fontSize: 14, fontWeight: '600',
+    fontSize: 14,
+    fontFamily: Fonts.medium,
     color: 'rgba(255,255,255,0.6)',
     marginLeft: 26, marginTop: 2, marginBottom: 8,
   },
@@ -484,13 +489,26 @@ const styles = StyleSheet.create({
     gap: 24,
   },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12 },
-  loadingText: { color: 'rgba(255,255,255,0.6)', fontSize: 15, textAlign: 'center' },
-  errorBig:    { color: '#ff6b6b', fontSize: 15, textAlign: 'center' },
+  loadingText: {
+    color: 'rgba(255,255,255,0.6)',
+    fontSize: 15,
+    textAlign: 'center',
+    fontFamily: Fonts.regular,
+  },
+  errorBig: {
+    color: '#ff6b6b',
+    fontSize: 15,
+    textAlign: 'center',
+    fontFamily: Fonts.regular,
+  },
   retryBtn: {
     backgroundColor: '#A855F7', paddingHorizontal: 24,
     paddingVertical: 10, borderRadius: 20,
   },
-  retryText: { color: '#fff', fontWeight: '700' },
+  retryText: {
+    color: '#fff',
+    fontFamily: Fonts.bold,
+  },
 
   blobWrap: {
     position: 'relative',
@@ -515,8 +533,11 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   blobTitle: {
-    fontSize: 18, fontWeight: '900',
-    textAlign: 'center', lineHeight: 20, letterSpacing: 0.2,
+    fontSize: 18,
+    fontFamily: Fonts.medium,
+    textAlign: 'center',
+    lineHeight: 20,
+    letterSpacing: 0.2,
     textShadowColor: 'rgba(0,0,0,0.2)',
     textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 3,
   },
@@ -524,8 +545,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row', alignItems: 'center',
     gap: 4, marginTop: 4,
   },
-  blobIcon: { fontSize: 14 },
-  blobSize: { fontSize: 11, fontWeight: '600' },
+  blobIcon: {
+    fontSize: 14,
+    fontFamily: Fonts.regular,
+  },
+  blobSize: {
+    fontSize: 11,
+    fontFamily: Fonts.medium,
+  },
 
   badge: { paddingHorizontal: 8, paddingVertical: 3, borderRadius: 20, marginBottom: 4 },
   badgeGreen: {
@@ -540,7 +567,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.15)',
     borderWidth: 1, borderColor: 'rgba(255,255,255,0.3)',
   },
-  badgeText: { color: '#fff', fontSize: 10, fontWeight: '800' },
+  badgeText: {
+    color: '#fff',
+    fontSize: 10,
+    fontFamily: Fonts.bold,
+  },
 
   progressTrack: {
     marginTop: 6,
@@ -554,5 +585,10 @@ const styles = StyleSheet.create({
     height: 3,
     borderRadius: 2,
   },
-  errorText: { color: '#ff6b6b', fontSize: 10, marginTop: 4 },
+  errorText: {
+    color: '#ff6b6b',
+    fontSize: 10,
+    marginTop: 4,
+    fontFamily: Fonts.regular,
+  },
 })

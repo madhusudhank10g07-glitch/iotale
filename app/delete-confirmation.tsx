@@ -4,6 +4,8 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import BackgroundPage from '@/components/props/peppabg';
+import { Fonts, Typography } from '@/constants/theme';
+
 export default function DeleteConfirmationScreen() {
   const router = useRouter();
 
@@ -56,7 +58,6 @@ export default function DeleteConfirmationScreen() {
     </BackgroundPage>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,  // Ensure background is white to match the aesthetic
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
   backText: {
     color: '#333', // Dark text since background is white
     fontSize: 18,
-    fontWeight: '600',
+    fontFamily: Fonts.medium,
   },
   card: {
     backgroundColor: '#1976D2',
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
   title: {
     color: '#FFFFFF',
     fontSize: 26,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     textAlign: 'center',
     marginBottom: 16,
     marginTop: 8,
@@ -102,6 +103,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     marginBottom: 24,
     paddingHorizontal: 10,
+    fontFamily: Fonts.regular,
   },
   deleteButton: {
     backgroundColor: '#FF6B9D',
@@ -115,7 +117,7 @@ const styles = StyleSheet.create({
   deleteButtonText: {
     color: '#FFFFFF',
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
   },
   cancelButton: {
      backgroundColor: '#ffffffff',
@@ -129,6 +131,6 @@ const styles = StyleSheet.create({
   cancelButtonText: {
     color: '#666',
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: Fonts.medium,
   },
 });

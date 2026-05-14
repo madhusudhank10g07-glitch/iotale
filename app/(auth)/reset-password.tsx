@@ -3,6 +3,7 @@ import { Alert, StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvo
 import { supabase } from '../../lib/supabase'
 import { useRouter } from 'expo-router'
 import BackgroundPage from '@/components/props/peppabg'
+import { Fonts, Typography } from '@/constants/theme';
 export default function ResetPasswordScreen() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -98,7 +99,6 @@ export default function ResetPasswordScreen() {
      </BackgroundPage>
   )
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -111,13 +111,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
     color: '#666',
     marginBottom: 32,
+    fontFamily: Fonts.regular,
   },
   inputContainer: {
     marginBottom: 16,
@@ -127,6 +128,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     fontSize: 16,
+    fontFamily: Fonts.regular,
   },
   button: {
     backgroundColor: '#000',
@@ -141,6 +143,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: Fonts.medium,
   },
 })

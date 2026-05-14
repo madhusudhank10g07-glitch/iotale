@@ -721,7 +721,7 @@ import { Audio } from 'expo-av'
 import Svg, { Circle, Path } from 'react-native-svg'
 import BackgroundPage from '@/components/props/peppabg'
 import { transcripts } from '@/transcripts'
-
+import { Fonts, Typography } from '@/constants/theme';
 // ─── Bottom Bar Icons (ported from web version) ──────────────────────────────
 
 const DiscMusicIcon = () => (
@@ -1138,7 +1138,6 @@ export default function PerformScreen() {
     </BackgroundPage>
   )
 }
-
 const styles = StyleSheet.create({
   // ── Top bar ──────────────────────────────────────────────────────────────
   topBar: {
@@ -1149,12 +1148,16 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   backBtn: { width: 70 },
-  backText: { color: '#fff', fontWeight: '700', fontSize: 15 },
+  backText: {
+    color: '#fff',
+    fontFamily: Fonts.bold,
+    fontSize: 15,
+  },
   topTitle: {
     flex: 1,
     color: '#fff',
     fontSize: 17,
-    fontWeight: '900',
+    fontFamily: Fonts.black,
     textAlign: 'center',
   },
 
@@ -1177,7 +1180,7 @@ const styles = StyleSheet.create({
   word: {
     fontSize: 20,
     color: 'rgba(255,255,255,0.3)',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     lineHeight: 34,
   },
   wordPast: {
@@ -1185,7 +1188,7 @@ const styles = StyleSheet.create({
   },
   wordCurrent: {
     color: '#FF8DC7',
-    fontWeight: '800',
+    fontFamily: Fonts.bold,
     fontSize: 22,
   },
   noTranscript: {
@@ -1194,6 +1197,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontStyle: 'italic',
     paddingVertical: 30,
+    fontFamily: Fonts.regular,
   },
 
   // ── Progress bar ──────────────────────────────────────────────────────────
@@ -1208,7 +1212,7 @@ const styles = StyleSheet.create({
   timeLabel: {
     color: 'rgba(255,255,255,0.45)',
     fontSize: 12,
-    fontWeight: '600',
+    fontFamily: Fonts.medium,
     minWidth: 36,
     textAlign: 'center',
   },

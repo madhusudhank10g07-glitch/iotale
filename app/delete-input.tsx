@@ -184,12 +184,13 @@
 //     fontWeight: '600',
 //   },
 // })
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native'
+
+import { View, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { useState } from 'react'
 import { useRouter } from 'expo-router'
 import { supabase } from '../lib/supabase'
 import BackgroundPage from '@/components/props/peppabg'
-
+import { Fonts, Typography } from '@/constants/theme';
 export default function DeleteInputScreen() {
 
   const [inputText, setInputText] = useState('')
@@ -309,7 +310,6 @@ export default function DeleteInputScreen() {
     </BackgroundPage>
   )
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
   backText: {
     color: '#FFFFFF', // Assuming background image is dark, or use #333 if light
     fontSize: 18,
-    fontWeight: '600',
+    fontFamily: Fonts.medium,
   },
   card: {
     backgroundColor: '#1976D2', // The Blue Color
@@ -346,7 +346,7 @@ const styles = StyleSheet.create({
   title: {
     color: '#FFFFFF',
     fontSize: 26,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     textAlign: 'center',
     marginBottom: 16,
     marginTop: 8,
@@ -358,9 +358,10 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     marginBottom: 24,
     paddingHorizontal: 10,
+    fontFamily: Fonts.regular,
   },
   boldText: {
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     color: '#FFEB3B', // Yellow tint to make "delete" pop on blue
   },
   input: {
@@ -370,6 +371,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
     textAlign: 'center',
+    fontFamily: Fonts.regular,
   },
   deleteButton: {
     backgroundColor: '#FF6B9D', // The Pink Color
@@ -388,7 +390,7 @@ const styles = StyleSheet.create({
   deleteButtonText: {
     color: '#FFFFFF',
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
   },
   buttonDisabled: {
     opacity: 0.7,
@@ -412,5 +414,6 @@ const styles = StyleSheet.create({
     color: '#000000ff',
     fontSize: 16,
     textDecorationLine: 'underline',
+    fontFamily: Fonts.regular,
   }
 })

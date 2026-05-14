@@ -4,6 +4,8 @@ import { supabase } from '../../lib/supabase'
 import { useRouter } from 'expo-router'
 import { useNavigation } from '@react-navigation/native'
 import BackgroundPage from "@/components/props/peppabg";
+import { Fonts, Typography } from '@/constants/theme'; 
+
 export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
@@ -96,7 +98,6 @@ export default function ForgotPasswordScreen() {
      </BackgroundPage>
   )
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -114,11 +115,11 @@ const styles = StyleSheet.create({
   backText: {
     fontSize: 16,
     color: '#000912ff',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
   },
   title: {
     fontSize: 32,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     marginBottom: 8,
   },
   subtitle: {
@@ -126,6 +127,7 @@ const styles = StyleSheet.create({
     color: '#666',
     marginBottom: 32,
     lineHeight: 22,
+    fontFamily: Fonts.regular,
   },
   inputContainer: {
     marginBottom: 16,
@@ -135,6 +137,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     fontSize: 16,
+    fontFamily: Fonts.regular,
   },
   button: {
     backgroundColor: '#000',
@@ -149,7 +152,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: Fonts.medium,
   },
   footer: {
     flexDirection: 'row',
@@ -160,10 +163,11 @@ const styles = StyleSheet.create({
   footerText: {
     fontSize: 14,
     color: '#666',
+    fontFamily: Fonts.regular,
   },
   link: {
     fontSize: 14,
     color: '#007AFF',
-    fontWeight: '600',
+    fontFamily: Fonts.medium,
   },
 })

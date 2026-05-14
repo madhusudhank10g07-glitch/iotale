@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
 import BackgroundPage from '@/components/props/peppabg';
-
+import { Fonts, Typography } from '@/constants/theme';
 const { width, height } = Dimensions.get('window');
 
 export default function DiyTalesScreen() {
@@ -67,7 +67,6 @@ export default function DiyTalesScreen() {
     </BackgroundPage>
   );
 }
-
 const styles = StyleSheet.create({
   container: { flex: 1 },
   scrollContent: { flex: 1 },
@@ -79,14 +78,14 @@ const styles = StyleSheet.create({
   },
   mainTitle: {
     fontSize: width * 0.1,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     color: '#FFFFFF',
     marginBottom: 10,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: width * 0.06,
-    fontWeight: '600',
+    fontFamily: Fonts.medium,
     color: '#FFFFFF',
     marginBottom: 20,
     textAlign: 'center',
@@ -97,6 +96,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     textAlign: 'center',
     lineHeight: 22,
+    fontFamily: Fonts.regular,
   },
   recordButton: {
     backgroundColor: '#22c55e',
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   recordButtonText: {
     color: '#FFFFFF',
     fontSize: width * 0.05,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
   },
   viewTalesButton: {
     marginTop: 20,
@@ -134,6 +134,6 @@ const styles = StyleSheet.create({
   viewTalesButtonText: {
     color: '#FFFFFF',
     fontSize: width * 0.04,
-    fontWeight: '600',
+    fontFamily: Fonts.medium,
   },
 });

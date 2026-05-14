@@ -6,7 +6,7 @@ import { supabase } from '../../lib/supabase'
 import { Session } from '@supabase/supabase-js'
 import BackgroundPage from '@/components/props/peppabg'
 import { useRouter } from 'expo-router'   // ← add this import
-
+import { Fonts, Typography } from '@/constants/theme';
 export default function HomeScreen() {
   const [session, setSession] = useState<Session | null>(null)
 const router = useRouter() 
@@ -62,7 +62,6 @@ const router = useRouter()
      </BackgroundPage>
   )
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     marginBottom: 24,
   },
   userInfo: {
@@ -83,73 +82,74 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#666',
     marginTop: 8,
+    fontFamily: Fonts.regular,
   },
   value: {
     fontSize: 16,
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     marginBottom: 8,
   },
 
 
   scrollContent: {
-  paddingHorizontal: 20,
-  paddingTop: 20,
-  paddingBottom: 40,
-  alignItems: 'center',
-},
-pageTitle: {
-  fontSize: 28,
-  fontWeight: 'bold',
-  color: '#FFFFFF',
-  textAlign: 'center',
-  marginBottom: 16,
-},
-card: {
-  width: '90%',
-  backgroundColor: '#1A3A8C',
-  borderRadius: 20,
-  overflow: 'hidden',
-  paddingBottom: 16,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 40,
+    alignItems: 'center',
+  },
+  pageTitle: {
+    fontSize: 28,
+    fontFamily: Fonts.bold,
+    color: '#FFFFFF',
+    textAlign: 'center',
+    marginBottom: 16,
+  },
+  card: {
+    width: '90%',
+    backgroundColor: '#274cac',
+    borderRadius: 20,
+    overflow: 'hidden',
+    paddingBottom: 16,
     padding: 18, 
     marginTop: 20,
-},
-cardImage: {
-  width: '100%',
-  height: 150,
-  borderRadius: 14,   
-},
-cardTitle: {
-  fontSize: 22,
-  fontWeight: 'bold',
-  color: '#FFFFFF',
-  textAlign: 'center',
-  marginTop: 12,
-},
+  },
+  cardImage: {
+    width: '100%',
+    height: 150,
+    borderRadius: 14,   
+  },
+  cardTitle: {
+    fontSize: 22,
+    fontFamily: Fonts.bold,
+    color: '#FFFFFF',
+    textAlign: 'center',
+    marginTop: 12,
+  },
 
-// card
+  // card
 
-tutorialCard: {
-  width: '90%',
-  backgroundColor: '#1A3A8C',
-  borderRadius: 20,
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  paddingVertical: 20,
-  paddingHorizontal: 20,
-  marginTop: 16,
-},
-tutorialText: {
-  fontSize: 16,
-  fontWeight: 'bold',
-  color: '#FFFFFF',
-  flex: 1,
-  flexWrap: 'wrap',
-  marginRight: 20,
-},
-playButton: {
-  width: 65,
-  height: 70,
-  marginTop:30,
-},
+  tutorialCard: {
+    width: '90%',
+    backgroundColor: '#1A3A8C',
+    borderRadius: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    marginTop: 16,
+  },
+  tutorialText: {
+    fontSize: 16,
+    fontFamily: Fonts.bold,
+    color: '#FFFFFF',
+    flex: 1,
+    flexWrap: 'wrap',
+    marginRight: 20,
+  },
+  playButton: {
+    width: 65,
+    height: 70,
+    marginTop:30,
+  },
 })

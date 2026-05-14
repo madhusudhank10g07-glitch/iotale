@@ -16,6 +16,7 @@ import { Audio } from 'expo-av';
 import SaveRecordingModal from '@/components/pages/SaveRecordingModal';
 import { uploadAudioFile, saveTale } from '../lib/talesService';
 import BackgroundPage from '@/components/props/peppabg';
+import { Fonts, Typography } from '@/constants/theme';
 
 type RecordingState = 'countdown' | 'recording' | 'paused' | 'stopped';
 
@@ -399,7 +400,6 @@ const DIYRecordingPage = () => {
     </BackgroundPage>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -415,7 +415,7 @@ const styles = StyleSheet.create({
   backText: {
     color: '#FFFFFF',
     fontSize: 18,
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
   },
   recordingContainer: {
     alignItems: 'center',
@@ -430,14 +430,14 @@ const styles = StyleSheet.create({
   },
   countdownText: {
     fontSize: 120,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     color: '#FFFFFF',
   },
   countdownLabel: {
     fontSize: 24,
     color: '#FFFFFF',
     marginTop: 20,
-    fontWeight: '600',
+    fontFamily: Fonts.medium,
   },
   pulseCircle: {
     position: 'absolute',
@@ -474,14 +474,14 @@ const styles = StyleSheet.create({
   recordingText: {
     color: '#FFFFFF',
     fontSize: 24,
-    fontWeight: '600',
+    fontFamily: Fonts.medium,
     textAlign: 'center',
     marginBottom: 10,
   },
   timerText: {
     color: '#FFFFFF',
     fontSize: 48,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     textAlign: 'center',
     marginBottom: 80,
   },
@@ -508,8 +508,7 @@ const styles = StyleSheet.create({
   speedText: {
     color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
   },
 });
-
 export default DIYRecordingPage;

@@ -158,7 +158,7 @@ import { Alert, StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView,
 import { supabase } from '../../lib/supabase'
 import { useRouter } from 'expo-router'
 import BackgroundPage from "@/components/props/peppabg";
-
+import { Fonts, Typography } from '@/constants/theme';
 export default function SignInScreen() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -306,7 +306,6 @@ export default function SignInScreen() {
     </BackgroundPage>
   )
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -332,7 +331,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 17,
-    fontWeight: "600",
+    fontFamily: Fonts.medium,
     color: "#FFFFFF",
     marginBottom: 12,
   },
@@ -346,6 +345,7 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 14,
     textDecorationLine: "underline",
+    fontFamily: Fonts.regular,
   },
   input: {
     backgroundColor: "#FFFFFF",
@@ -354,6 +354,7 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     fontSize: 16,
     color: "#333",
+    fontFamily: Fonts.regular,
   },
   signInButton: {
     backgroundColor: "#F492B5",
@@ -377,7 +378,7 @@ const styles = StyleSheet.create({
   signInButtonText: {
     color: "#FFFFFF",
     fontSize: 22,
-    fontWeight: "bold",
+    fontFamily: Fonts.bold,
   },
   signUpContainer: {
     flexDirection: "row",
@@ -389,11 +390,12 @@ const styles = StyleSheet.create({
   signUpText: {
     color: "#FFFFFF",
     fontSize: 16,
+    fontFamily: Fonts.regular,
   },
   signUpLink: {
     color: "#FFFFFF",
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: Fonts.bold,
     textDecorationLine: "underline",
   },
 })

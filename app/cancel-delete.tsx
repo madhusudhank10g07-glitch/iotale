@@ -2,14 +2,14 @@
 import BackgroundPage from '@/components/props/peppabg'
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  TextInput,
+  View, 
   TouchableOpacity,
   StyleSheet,
   Modal,
   Alert,
 } from 'react-native';
+import { Fonts, Typography } from '@/constants/theme';
+
 import { useNavigation ,useRouter } from 'expo-router';
 export default function CancelDeleteScreen() {
   const navigate = useNavigation();
@@ -79,7 +79,6 @@ changing your mind</Text>
     </BackgroundPage>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,  
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
   backText: {
     color: '#FFFFFF',
     fontSize: 18,
-    fontWeight: '600',
+    fontFamily: Fonts.medium,
   },
   card: {
     backgroundColor: '#1976D2',
@@ -117,12 +116,12 @@ const styles = StyleSheet.create({
   closeText: {
     color: '#FFFFFF',
     fontSize: 24,
-    fontWeight: '400',
+    fontFamily: Fonts.regular,
   },
   title: {
     color: '#FFFFFF',
     fontSize: 26,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     textAlign: 'center',
     marginBottom: 16,
     marginTop: 8,
@@ -134,6 +133,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     marginBottom: 24,
     paddingHorizontal: 10,
+    fontFamily: Fonts.regular,
   },
   input: {
     backgroundColor: '#FFFFFF',
@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
     padding: 16,
     fontSize: 16,
     color: '#333',
+    fontFamily: Fonts.regular,
   },
   deleteButton: {
     backgroundColor: '#20ca17ff',
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
   deleteButtonText: {
     color: '#FFFFFF',
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
   },
    
 });

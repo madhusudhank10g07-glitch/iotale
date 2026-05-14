@@ -23,6 +23,7 @@ import {
 } from 'lucide-react-native'
 import { useAudioDownload } from '@/hooks/useAudioDownload'
 import BackgroundPage from '@/components/props/peppabg'
+import { Fonts, Typography } from '@/constants/theme';
 
 const { height } = Dimensions.get('window')
 
@@ -194,7 +195,6 @@ export default function StartTalesScreen() {
     </BackgroundPage>
   )
 }
-
 const styles = StyleSheet.create({
   container: { flex: 1 },
   backgroundContainer: {
@@ -204,17 +204,30 @@ const styles = StyleSheet.create({
   backgroundImage: { width: '100%', height: '100%', resizeMode: 'cover' },
   header: { paddingTop: 60, paddingHorizontal: 24, zIndex: 20 },
   backButton: { flexDirection: 'row', alignItems: 'center' },
-  backText: { color: '#fff', fontSize: 18, fontWeight: 'bold', marginLeft: 8 },
+  backText: {
+    color: '#fff',
+    fontSize: 18,
+    fontFamily: Fonts.bold,
+    marginLeft: 8,
+  },
   scrollView: { flex: 1, zIndex: 10 },
   scrollContent: { paddingHorizontal: 24, paddingBottom: 40 },
   heroSection: { alignItems: 'center', marginTop: 20 },
   subtitle: {
-    color: 'rgba(255,255,255,0.75)', fontSize: 13, fontWeight: '700',
-    letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 10,
+    color: 'rgba(255,255,255,0.75)',
+    fontSize: 13,
+    fontFamily: Fonts.bold,
+    letterSpacing: 1.2,
+    textTransform: 'uppercase',
+    marginBottom: 10,
   },
   title: {
-    color: '#fff', fontSize: 32, fontWeight: '900',
-    textAlign: 'center', marginBottom: 16, lineHeight: 40,
+    color: '#fff',
+    fontSize: 32,
+    fontFamily: Fonts.black,
+    textAlign: 'center',
+    marginBottom: 16,
+    lineHeight: 40,
   },
   timeBadge: {
     flexDirection: 'row', alignItems: 'center',
@@ -223,23 +236,46 @@ const styles = StyleSheet.create({
     borderWidth: 1, borderColor: 'rgba(255,255,255,0.1)', gap: 6,
   },
   timeBadgeIcon: { fontSize: 14 },
-  timeText: { color: '#fff', fontSize: 14, fontWeight: '600' },
+  timeText: {
+    color: '#fff',
+    fontSize: 14,
+    fontFamily: Fonts.medium,
+  },
   description: {
-    color: 'rgba(255,255,255,0.75)', fontSize: 14,
-    textAlign: 'center', fontWeight: '500', maxWidth: 290, lineHeight: 22,
+    color: 'rgba(255,255,255,0.75)',
+    fontSize: 14,
+    textAlign: 'center',
+    fontFamily: Fonts.medium,
+    maxWidth: 290,
+    lineHeight: 22,
   },
   section: { marginTop: 44, alignItems: 'center' },
-  sectionTitle: { color: '#fff', fontSize: 22, fontWeight: '900', marginBottom: 22 },
+  sectionTitle: {
+    color: '#fff',
+    fontSize: 22,
+    fontFamily: Fonts.black,
+    marginBottom: 22,
+  },
   actionRow: { flexDirection: 'row', justifyContent: 'center', gap: 16, width: '100%' },
   actionCard: {
     width: 88, height: 96, backgroundColor: '#163870', borderRadius: 16,
     alignItems: 'center', justifyContent: 'center',
     borderWidth: 1, borderColor: 'rgba(255,255,255,0.07)',
   },
-  actionText: { color: '#bfdbfe', fontSize: 11, fontWeight: '700', marginTop: 8 },
+  actionText: {
+    color: '#bfdbfe',
+    fontSize: 11,
+    fontFamily: Fonts.bold,
+    marginTop: 8,
+  },
   characterDesc: {
-    color: 'rgba(255,255,255,0.75)', fontSize: 14, textAlign: 'center',
-    fontWeight: '500', marginBottom: 28, maxWidth: 300, lineHeight: 22,
+    color: 'rgba(255,255,255,0.75)',
+    fontSize: 14,
+    textAlign: 'center',
+    fontFamily: Fonts.medium,
+    marginBottom: 28,
+    maxWidth: 300,
+    lineHeight: 22,
   },
   characterGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 20 },
   characterItem: { alignItems: 'center', width: 80, marginBottom: 8 },
@@ -248,7 +284,11 @@ const styles = StyleSheet.create({
     alignItems: 'center', justifyContent: 'center', marginBottom: 8,
     borderWidth: 1, borderColor: 'rgba(255,255,255,0.07)',
   },
-  characterLabel: { color: '#bfdbfe', fontSize: 11, fontWeight: '600' },
+  characterLabel: {
+    color: '#bfdbfe',
+    fontSize: 11,
+    fontFamily: Fonts.medium,
+  },
   fabContainer: {
     position: 'absolute', bottom: 40, left: 0,
     width: '100%', alignItems: 'center', zIndex: 30,
@@ -260,5 +300,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5, shadowRadius: 18, elevation: 10,
   },
   fabDisabled: { opacity: 0.45 },
-  fabText: { color: '#fff', fontSize: 18, fontWeight: '800' },
+  fabText: {
+    color: '#fff',
+    fontSize: 18,
+    fontFamily: Fonts.bold,
+  },
 })

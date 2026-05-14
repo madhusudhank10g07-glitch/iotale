@@ -49,7 +49,7 @@
 // app/(tabs)/_layout.tsx
 import { Tabs } from "expo-router";
 import { Image } from "react-native";
-
+import { Fonts, Typography } from '@/constants/theme';
 export default function TabsLayout() {
   return (
     <Tabs

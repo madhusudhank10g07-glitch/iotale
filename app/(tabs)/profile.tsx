@@ -6,6 +6,8 @@ import { useNavigation } from "@react-navigation/native";
 import { Session } from "@supabase/supabase-js";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
+import { Fonts, Typography } from '@/constants/theme';
+
 import {
   Alert,
   Dimensions,
@@ -200,7 +202,6 @@ const ProfilePage = () => {
     </BackgroundPage>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -229,18 +230,18 @@ const styles = StyleSheet.create({
   backArrow: {
     color: "#FFFFFF",
     fontSize: 22,
-    fontWeight: "600",
+    fontFamily: Fonts.medium,
     marginRight: 6,
   },
   backText: {
     color: "#FFFFFF",
     fontSize: 17,
-    fontWeight: "600",
+    fontFamily: Fonts.medium,
   },
   title: {
     color: "#FFFFFF",
     fontSize: 34,
-    fontWeight: "bold",
+    fontFamily: Fonts.medium,
     textAlign: "center",
     marginBottom: 10,
     paddingHorizontal: 20,
@@ -252,12 +253,13 @@ const styles = StyleSheet.create({
   userName: {
     color: "#FFFFFF",
     fontSize: 20,
-    fontWeight: "600",
+    fontFamily: Fonts.medium,
   },
   userPhone: {
     color: "#B8C5D6",
     fontSize: 14,
     marginTop: 4,
+    fontFamily: Fonts.regular,
   },
   sessionInfo: {
     marginHorizontal: 20,
@@ -277,10 +279,11 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     textTransform: "uppercase",
     letterSpacing: 0.5,
+    fontFamily: Fonts.regular,
   },
   sessionValue: {
     fontSize: 16,
-    fontWeight: "500",
+    fontFamily: Fonts.medium,
     color: "#FFFFFF",
   },
   menuContainer: {
@@ -332,7 +335,7 @@ const styles = StyleSheet.create({
   menuText: {
     color: "#FFFFFF",
     fontSize: 16,
-    fontWeight: "600",
+    fontFamily: Fonts.medium,
   },
   deleteMenuText: {
     color: "#FF3B30",

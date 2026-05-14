@@ -1,76 +1,181 @@
- 
+// import { useColorScheme } from "@/hooks/use-color-scheme";
+// import {
+//   DarkTheme,
+//   DefaultTheme,
+//   ThemeProvider,
+// } from "@react-navigation/native";
+// import { Session } from "@supabase/supabase-js";
+// import { useFonts } from "expo-font";
+// import { Stack, useRouter, useSegments } from "expo-router";
+// import { StatusBar } from "expo-status-bar";
+// import { useEffect, useState } from "react";
+// import { View } from "react-native"; // Import these!
+// import "react-native-reanimated";
+// import SplashScreen from "../components/SplashScreen";
+// import { LanguageProvider } from "../contexts/LanguageContext";
+// import { supabase } from "../lib/supabase";
+// export const unstable_settings = {
+//   anchor: "(tabs)",
+// };
 
-import { useEffect, useState } from 'react'
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
-import { Stack, useRouter, useSegments } from 'expo-router'
-import { StatusBar } from 'expo-status-bar'
-import { Session } from '@supabase/supabase-js'
-import { View, ActivityIndicator } from 'react-native' // Import these!
-import 'react-native-reanimated'
+// export default function RootLayout() {
+//   const colorScheme = useColorScheme();
+//   const [session, setSession] = useState<Session | null>(null);
+//   const [loading, setLoading] = useState(true);
+//   const segments = useSegments();
+//   const router = useRouter();
+//   const [showSplash, setShowSplash] = useState(true);
+//   const [fontsLoaded, fontError] = useFonts({
+//   FredokaRegular: require("../assets/fonts/fredoka-latin-ext-400-normal.ttf"),
+//   FredokaMedium: require("../assets/fonts/fredoka-latin-ext-500-normal.ttf"),
+//   FredokaBold: require("../assets/fonts/fredoka-latin-ext-700-normal.ttf"),
+// });
+//   useEffect(() => {
+//     const timer = setTimeout(() => {
+//       setShowSplash(false);
+//     }, 8000);
+//     return () => clearTimeout(timer);
+//   }, []);
 
-import { useColorScheme } from '@/hooks/use-color-scheme'
-import { supabase } from '../lib/supabase'
-import { LanguageProvider } from '../contexts/LanguageContext'
-import SplashScreen from '../components/SplashScreen'
+//   useEffect(() => {
+//     // FIX 1: Handle errors here so loading doesn't get stuck
+//     supabase.auth
+//       .getSession()
+//       .then(({ data: { session }, error }) => {
+//         if (error) console.log("Supabase Error:", error);
+//         setSession(session);
+//         setLoading(false);
+//       })
+//       .catch((err) => {
+//         console.log("Supabase critical fail:", err);
+//         setLoading(false); // Force loading off even if it fails
+//       });
+
+//     const {
+//       data: { subscription },
+//     } = supabase.auth.onAuthStateChange((_event, session) => {
+//       setSession(session);
+//     });
+
+//     return () => subscription.unsubscribe();
+//   }, []);
+
+//   useEffect(() => {
+//     if (loading) return;
+//     const inAuthGroup = segments[0] === "(auth)";
+//     if (!session && !inAuthGroup) {
+//       router.replace("/(auth)/sign-in");
+//     } else if (session && inAuthGroup) {
+//       router.replace("/(tabs)");
+//     }
+//   }, [session, segments, loading]);
+//   if (!fontsLoaded && !fontError) return null;
+//   if (showSplash) {
+//     return <SplashScreen />;
+//   }
+
+//   // FIX 2: Never return 'null'. Show a spinner so you know the app is alive.
+
+//   return (
+//     // FIX 3: Critical Flex Container for Android
+//     <View style={{ flex: 1 }}>
+//       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+//         <LanguageProvider>
+//           <Stack screenOptions={{ headerShown: false }}>
+//             <Stack.Screen name="(auth)" />
+//             <Stack.Screen name="(tabs)" />
+//           </Stack>
+//           <StatusBar style="auto" />
+//         </LanguageProvider>
+//       </ThemeProvider>
+//     </View>
+//   );
+// }
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
+import { Session } from "@supabase/supabase-js";
+import { useFonts } from "expo-font";
+import { Stack, useRouter, useSegments } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { useEffect, useState } from "react";
+import { View } from "react-native";
+import "react-native-reanimated";
+import SplashScreen from "../components/SplashScreen";
+import { LanguageProvider } from "../contexts/LanguageContext";
+import { supabase } from "../lib/supabase";
 
 export const unstable_settings = {
-  anchor: '(tabs)',
-}
+  anchor: "(tabs)",
+};
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme()
-  const [session, setSession] = useState<Session | null>(null)
-  const [loading, setLoading] = useState(true)
-  const segments = useSegments()
-  const router = useRouter()
-  const [showSplash, setShowSplash] = useState(true)
+  const colorScheme = useColorScheme();
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(true);
+  const segments = useSegments();
+  const router = useRouter();
+  const [showSplash, setShowSplash] = useState(true);
+
+  const [fontsLoaded, fontError] = useFonts({
+    FredokaRegular: require("../assets/fonts/fredoka-latin-400-normal.ttf"),
+    FredokaMedium: require("../assets/fonts/fredoka-latin-500-normal.ttf"),
+    FredokaBold: require("../assets/fonts/fredoka-latin-700-normal.ttf"),
+  });
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowSplash(false)
-    }, 8000)
-    return () => clearTimeout(timer)
-  }, [])
+      setShowSplash(false);
+    }, 8000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
-    // FIX 1: Handle errors here so loading doesn't get stuck
-    supabase.auth.getSession().then(({ data: { session }, error }) => {
-      if (error) console.log("Supabase Error:", error);
-      setSession(session)
-      setLoading(false)
-    }).catch(err => {
-      console.log("Supabase critical fail:", err);
-      setLoading(false); // Force loading off even if it fails
-    })
+    supabase.auth
+      .getSession()
+      .then(({ data: { session }, error }) => {
+        if (error) console.log("Supabase Error:", error);
+        setSession(session);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log("Supabase critical fail:", err);
+        setLoading(false);
+      });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
 
-    return () => subscription.unsubscribe()
-  }, [])
+    return () => subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
-    if (loading) return
-    const inAuthGroup = segments[0] === '(auth)'
+    if (loading) return;
+
+    const inAuthGroup = segments[0] === "(auth)";
+
     if (!session && !inAuthGroup) {
-      router.replace('/(auth)/sign-in')
+      router.replace("/(auth)/sign-in");
     } else if (session && inAuthGroup) {
-      router.replace('/(tabs)')
+      router.replace("/(tabs)");
     }
-  }, [session, segments, loading])
+  }, [session, segments, loading, router]);
+
+  if (!fontsLoaded && !fontError) return null;
 
   if (showSplash) {
-    return <SplashScreen />
+    return <SplashScreen />;
   }
 
-  // FIX 2: Never return 'null'. Show a spinner so you know the app is alive.
- 
-
   return (
-    // FIX 3: Critical Flex Container for Android
     <View style={{ flex: 1 }}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <LanguageProvider>
           <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="(auth)" />
@@ -80,5 +185,5 @@ export default function RootLayout() {
         </LanguageProvider>
       </ThemeProvider>
     </View>
-  )
+  );
 }

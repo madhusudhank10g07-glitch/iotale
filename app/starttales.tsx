@@ -131,12 +131,12 @@ export default function StartTalesScreen() {
           <Text style={styles.subtitle}>{categoryTitle}</Text>
           <Text style={styles.title}>{title}</Text>
 
-          {fileSizeLabel && (
+          {/* {fileSizeLabel && (
             <View style={styles.timeBadge}>
-              <Text style={styles.timeBadgeIcon}>🎵</Text>
-              <Text style={styles.timeText}>{fileSizeLabel}</Text>
+              <Text style={styles.timeBadgeIcon}></Text>
+              <Text style={styles.timeText}></Text>
             </View>
-          )}
+          )} */}
 
           <Text style={styles.description}>
             Tap "Begin to Perform" to start the interactive story experience

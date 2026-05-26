@@ -1206,7 +1206,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
     marginTop: 14,
-    marginBottom: 10,
+    marginBottom: 18,
     paddingHorizontal: 16,
   },
   timeLabel: {

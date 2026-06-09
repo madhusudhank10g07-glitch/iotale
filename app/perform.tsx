@@ -1084,7 +1084,7 @@ export default function PerformScreen() {
       </ScrollView>
 
       {/* Draggable progress bar */}
-      <View style={styles.progressRow}>
+      {/* <View style={styles.progressRow}>
         <Text style={styles.timeLabel}>{formatTime(position)}</Text>
         <View
           style={styles.track}
@@ -1095,7 +1095,7 @@ export default function PerformScreen() {
           <View style={[styles.thumb, { left: `${displayProgress * 100}%` }]} />
         </View>
         <Text style={styles.timeLabel}>{formatTime(duration)}</Text>
-      </View>
+      </View> */}
 
       {/* ── Bottom Tool Bar (UI from web version) ── */}
       <View style={styles.bottomBar}>
@@ -1165,6 +1165,7 @@ const styles = StyleSheet.create({
   transcriptScroll: {
     flex: 1,
     marginHorizontal: 16,
+    marginBottom: 16, 
     backgroundColor: 'rgba(0,0,0,0.2)',
     borderRadius: 16,
   },
